@@ -1,0 +1,23 @@
+<body>
+  <div class="container">
+    <header>
+      <h1>Bids</h1>
+    </header>
+    {{> loginButtons}}
+    {{#if currentUser}}
+      <form class="new-bid">
+        <input type="text" name="text" placeholder="Enter your bid!" />
+      </form>
+    {{/if}}
+ 
+    <ul>
+      {{#each bids}}
+        {{> bid}}
+      {{/each}}
+    </ul>
+  </div>
+</body>
+ 
+<template name="bid">
+  <li>{{value}}, by {{username}}</li>
+</template>
