@@ -13,7 +13,10 @@ Template.body.onCreated(function bodyOnCreated() {
 Template.body.helpers({
 
   bids() {
-    return Bids.find({});
+    return Bids.find({}, {
+      sort: { value: -1 },
+      limit: 3
+    });
   },
 });
 
