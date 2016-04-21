@@ -4,22 +4,54 @@
     <header>
     {{> topbar}}
     </header>
+    <div class="ui grid stackable">
+      <div class="eight wide column">
+        <h1>Current Round</h1>
+        <p>New round every <span>30 seconds</span></p>
+        <div class="ui standard progress bid">
+          <div class="bar"></div>
+          <div class="label">10s</div>
+        </div>
 
-    <h1>Bid Leaderboard</h1>
-    {{#if currentUser}}
-      <form class="new-bid">
-        <input type="text" name="text" placeholder="Enter your best bid!" />
-      </form>
-    {{/if}}
- 
-    <div class="ui ordered list">
-      {{#each bids}}
-        {{> bid}}
-      {{/each}}
+        <h4 class="ui horizontal divider header">
+          <i class="bar chart icon"></i>
+          Leaderboard
+        </h4>
+        {{#if currentUser}}
+          <form class="new-bid">
+            <input type="text" name="text" placeholder="Enter your best bid!" />
+          </form>
+        {{/if}}
+     
+        <div class="ui ordered list leaderboard">
+          {{#each bids}}
+            {{> bid}}
+          {{/each}}
+        </div>
+        <div class="ui divider"></div>
+      </div>
+
+      <div class="eight wide column">
+        <h1>Bid</h1>
+        <p>
+        {{#if currentUser}}
+        Signed in as 
+        {{else}}
+        Want to join the fun? 
+        {{/if}}
+        {{> loginButtons}}
+        </p>
+        {{#if currentUser}}
+          {{> bid_steps}}
+        {{else}}
+        
+        {{/if}}
+      </div>
     </div>
   </div>
 </body>
- 
+
+
 <template name="bid">
 
   <div class="item">
