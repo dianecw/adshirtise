@@ -1,4 +1,9 @@
 <template name="bid_steps">
 <h4 class="">1. Choose an ad</h4>
 <h4 class="">2. Choose your price</h4>
+{{#if currentUser}}
+  <form class="new-bid">
+    <input type="text" name="text" placeholder="Enter your best bid!" />
+  </form>
+{{/if}}
 </template>
