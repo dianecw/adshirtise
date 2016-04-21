@@ -1,23 +1,33 @@
+
 <body>
-  <div class="container">
+  <div class="main container">
     <header>
-      <h1>Bids</h1>
+    {{> topbar}}
     </header>
-    {{> loginButtons}}
+
+    <h1>Bid Leaderboard</h1>
     {{#if currentUser}}
       <form class="new-bid">
         <input type="text" name="text" placeholder="Enter your best bid!" />
       </form>
     {{/if}}
  
-    <ul>
+    <div class="ui ordered list">
       {{#each bids}}
         {{> bid}}
       {{/each}}
-    </ul>
+    </div>
   </div>
 </body>
  
 <template name="bid">
-  <li>{{value}}, by {{username}}</li>
-</template>
+
+  <div class="item">
+    <img class="ui avatar image" src="/images/tom.jpg">
+    <div class="content">
+      <div class="header">{{username}}</div>
+      {{value}}
+    </div>
+  </div>
+  </template>
+

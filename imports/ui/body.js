@@ -4,6 +4,7 @@ import { Bids } from '..//api/bids.js';
 
  
 import './body.html';
+import './topbar.html'
  
 Template.body.onCreated(function bodyOnCreated() {
   //this.state = new ReactiveDict();
