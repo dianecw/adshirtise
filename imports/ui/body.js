@@ -8,6 +8,21 @@ import './topbar.html'
 import './bid_steps.html'
 import './user_menu.html'
 //import './loginButtons.html'
+
+Template.user_menu.events({
+    'click .dropdown.user .item': function(e) {
+    $('.dropdown.user .item').click(function(){ 
+      avatar_img = this.id;
+      Meteor.users.update({_id:Meteor.user()._id}, 
+        { $set: {"profile.avatar": [avatar_img]} });
+      //Meteor.user.avatar = this.innerHTML;
+      $('#current_avatar').attr('src', avatar_img);
+      //console.log(avatar_img);
+      //console.log(Meteor.user().profile.avatar);
+    });
+  }
+
+  });
  
 Template.body.onCreated(function bodyOnCreated() {
   //this.state = new ReactiveDict();
@@ -23,6 +38,22 @@ Template.body.helpers({
     });
   },
 });
+
+Template.bid.helpers({
+
+  avatar_image(username1) {
+    curr_user = Meteor.users.find({"username": username1});
+    curr_user = curr_user.fetch()[0]
+    if ('profile' in curr_user){
+      return curr_user.profile.avatar
+    }else {
+      return "/images/1.jpg"
+    }
+  },
+});
+
+
+
 
 Template.body.events({
   'submit .new-bid'(event) {

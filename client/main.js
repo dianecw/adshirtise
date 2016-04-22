@@ -3,7 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import '../imports/ui/body.js';
 import '../imports/startup/accounts-config.js';
 //import 'main.css';
-$(document).ready(function() {
+$( document ).ready(function() {
 
     var progression = 0,
     progress = setInterval(function() 
@@ -23,7 +23,9 @@ $(document).ready(function() {
 
     }, 1000);
 
-});
+
+    });
+
 
 //import './main.html';
 /**
