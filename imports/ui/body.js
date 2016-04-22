@@ -6,6 +6,7 @@ import { Bids } from '..//api/bids.js';
 import './body.html';
 import './topbar.html'
 import './bid_steps.html'
+import './user_menu.html'
 //import './loginButtons.html'
  
 Template.body.onCreated(function bodyOnCreated() {
@@ -18,7 +19,7 @@ Template.body.helpers({
   bids() {
     return Bids.find({}, {
       sort: { value: -1 },
-      limit: 5
+      limit: 10
     });
   },
 });

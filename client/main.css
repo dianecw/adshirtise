@@ -32,5 +32,30 @@
   .leaderboard{
     margin-left: 3em !important;
     margin-right: 3em !important;
+    height:12em;
+    overflow: auto
+
+  }
+
+  .item:before{
+    margin-left:0 !important;
+    margin-top: 0.5em;
+  }
+
+  .ui.avatar.image.leaderboard{
+    margin-left: 1.5em !important;
+    margin-right: 0.5em !important;
+  }
+
+  .ui.compact.menu.avatar{
+    border:none;
+    box-shadow:none;
+  }
+
+  .ui.horizontal.segments.user{
+    margin-top:0 !important;
   }
  
+   .item.login{
+    padding-top:0.3em;
+  }
