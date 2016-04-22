@@ -50,6 +50,17 @@ if (Meteor.isServer) {
 
     }, 1000);
 
+Accounts.onCreateUser(function(options, user) {
+    //pass the surname in the options
+    user.avatar = "/images/1.jpg";
+    if (options.profile)
+      user.profile = options.profile;
+    return user;
+    //user.profile['avatar'] = "/images/1.jpg"
+
+    //return user
+});
+
 /**
   // Generates: POST on /api/users and GET, DELETE /api/users/:id for
   // Meteor.users collection

@@ -5,7 +5,7 @@ import '../imports/startup/accounts-config.js';
 import { Advertisers } from '../imports/api/advertisers.js';
 
 //import 'main.css';
-$(document).ready(function() {
+$( document ).ready(function() {
 
     var progression = 0,
     progress = setInterval(function() 
@@ -28,7 +28,9 @@ $(document).ready(function() {
 
     }, 1000);
 
-});
+
+    });
+
 
 //import './main.html';
 /**
