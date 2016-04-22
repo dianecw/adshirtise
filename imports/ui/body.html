@@ -6,6 +6,7 @@
     </header>
     <div class="ui grid stackable">
       <div class="eight wide column">
+      <div class="ui segment">
         <h1>Current Round</h1>
         <p>New round every <span>30 seconds</span></p>
         <div class="ui standard progress bid" id="bid-timer">
@@ -17,28 +18,27 @@
           <i class="bar chart icon"></i>
           Leaderboard
         </h4>
-     
-        <div class="ui ordered list leaderboard">
+        <ol class="ui list leaderboard">
           {{#each bids}}
             {{> bid}}
           {{/each}}
-        </div>
-        <div class="ui divider"></div>
+        </ol>
+        <!--<div class="ui divider"></div> -->
       </div>
-
+      </div>
       <div class="eight wide column">
+        {{> user_menu}}
+        {{#if currentUser}}
+
+        <div class="ui segment">
+
         <h1>Bid</h1>
-        <p>
-        {{#if currentUser}}
-        Signed in as 
-        {{else}}
-        Want to join the fun? 
-        {{/if}}
-        {{> loginButtons}}
-        </p>
-        {{#if currentUser}}
+
+        
           {{> bid_steps}}
-        {{else}}
+
+        </div>
+                {{else}}
         
         {{/if}}
       </div>
@@ -49,12 +49,12 @@
 
 <template name="bid">
 
-  <div class="item">
-    <img class="ui avatar image" src="/images/tom.jpg">
+  <li class="item">
+    <img class="ui avatar image leaderboard" src="/images/1.jpg">
     <div class="content">
       <div class="header">{{username}}</div>
       {{value}}
     </div>
-  </div>
+  </li>
   </template>
 

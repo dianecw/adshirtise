@@ -7,6 +7,7 @@ import { Advertisers } from '..//api/advertisers.js';
 import './body.html';
 import './topbar.html'
 import './bid_steps.html'
+import './user_menu.html'
 //import './loginButtons.html'
  
 Template.body.onCreated(function bodyOnCreated() {
@@ -20,7 +21,7 @@ Template.body.helpers({
     advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
     return Bids.find({round: advertiser.round}, {
       sort: { value: -1 },
-      limit: 5
+      limit: 10
     });
   },
 });
