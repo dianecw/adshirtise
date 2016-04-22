@@ -31,13 +31,15 @@ Template.body.events({
     // Get value from form element
     const target = event.target;
     const value = target.text.value;
- 
+    var msg = document.getElementById('msg').value;
+   
     // Insert a task into the collection
     Bids.insert({
       value: value,
       createdAt: new Date(), // current time
       owner: Meteor.userId(),
       username: Meteor.user().username,
+      msg: msg,
     });
  
     // Clear form
