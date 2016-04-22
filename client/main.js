@@ -3,7 +3,27 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import '../imports/ui/body.js';
 import '../imports/startup/accounts-config.js';
 //import 'main.css';
+$(document).ready(function() {
 
+    var progression = 0,
+    progress = setInterval(function() 
+    {
+    	seconds = new Date().getSeconds()
+        //$('#progress .progress-text').text(progression + '%');
+        //$('#progress .progress-bar').css({'width':progression+'%'});
+        if(progression == 100) {
+            clearInterval(progress);
+            alert('done');
+        } else
+            $('#bid-timer').progress({
+  				percent: (30 - ( seconds % 30))*(100/30),
+  				showActivity: false
+			});
+			$('#bid-timer-label').text((30 - ( seconds % 30)).toString() + "s");
+
+    }, 1000);
+
+});
 
 //import './main.html';
 /**
