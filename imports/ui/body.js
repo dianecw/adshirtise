@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Bids } from '..//api/bids.js';
+import { Advertisers } from '..//api/advertisers.js';
 
  
 import './body.html';
@@ -32,7 +33,8 @@ Template.body.onCreated(function bodyOnCreated() {
 Template.body.helpers({
 
   bids() {
-    return Bids.find({}, {
+    advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
+    return Bids.find({round: advertiser.round}, {
       sort: { value: -1 },
       limit: 10
     });
@@ -66,13 +68,17 @@ Template.body.events({
     var msg = document.getElementById('msg').value;
    
     // Insert a task into the collection
+
+    var advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
     Bids.insert({
       value: value,
       createdAt: new Date(), // current time
       owner: Meteor.userId(),
       username: Meteor.user().username,
       msg: msg,
-    });
+      round: advertiser.round});
+
+
  
     // Clear form
     target.text.value = '';
