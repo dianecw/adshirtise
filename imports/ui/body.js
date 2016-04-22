@@ -34,10 +34,12 @@ Template.bid_steps.onRendered(function(){
     $('.new-bid').validate({
         rules: {
             msgtext: {
-                minlength: 1
+              minlength: 1,
+              required: true
             },
             text: {
-              minlength: 6
+              min: 0,
+              required: true
             }
 
         }
