@@ -20,6 +20,13 @@ if (Meteor.isServer) {
   // Advertisers (which we will only have one of) will have a current ad and location.
   Api.addCollection(Advertisers); 
 
+  Fiber(function() {
+    advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
+    if (advertiser === undefined) {
+      Advertisers.insert({round: 0, curr_msg: "No msg."});
+    }
+  }).run();
+
   setInterval(function() 
     {
       seconds = new Date().getSeconds()
@@ -28,6 +35,11 @@ if (Meteor.isServer) {
       if (percentage == 100) {
         Fiber(function() {
           advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
+
+          if (advertiser === undefined) {
+            Advertisers.insert({round: 0, curr_msg: "No msg."});
+          }
+
           best_bid = (Bids.find({round: advertiser.round}, {limit:1, sort: {value: -1}})).fetch()[0];
           if (best_bid === undefined) {
             msg = "No current ad."
@@ -39,9 +51,6 @@ if (Meteor.isServer) {
         }).run();
         
       }
-            // var advertiser = Advertisers.find({}, {limit: 1});
-            // alert(advertiser);
-            // Advertisers.update({});
 
     }, 1000);
 
