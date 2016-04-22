@@ -15,6 +15,20 @@ Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('bids');
 });
 
+Template.bid_steps.onRendered(function(){
+    $('.new-bid').validate({
+        rules: {
+            msgtext: {
+                minlength: 1
+            },
+            text: {
+              minlength: 6
+            }
+
+        }
+    });
+});
+
 Template.body.helpers({
 
   bids() {
@@ -40,7 +54,7 @@ Template.body.events({
 
     var advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
     Bids.insert({
-      value: value,
+      value: Number(value),
       createdAt: new Date(), // current time
       owner: Meteor.userId(),
       username: Meteor.user().username,

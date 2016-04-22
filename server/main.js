@@ -36,10 +36,6 @@ if (Meteor.isServer) {
         Fiber(function() {
           advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
 
-          if (advertiser === undefined) {
-            Advertisers.insert({round: 0, curr_msg: "No msg."});
-          }
-
           best_bid = (Bids.find({round: advertiser.round}, {limit:1, sort: {value: -1}})).fetch()[0];
           if (best_bid === undefined) {
             msg = "No current ad."
