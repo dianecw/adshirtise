@@ -18,7 +18,7 @@ Template.body.helpers({
   bids() {
     return Bids.find({}, {
       sort: { value: -1 },
-      limit: 3
+      limit: 5
     });
   },
 });
