@@ -1,5 +1,7 @@
 <template name="user_menu">
   <div class="ui horizontal segments user">
+    {{#if currentUser}}
+
     <div class="ui compact menu avatar">
       <div class="ui simple dropdown item">
           <img class="ui avatar image" src="/images/1.jpg">
@@ -25,7 +27,9 @@
           </div>
         </div>
       </div>
+      
 </div>
+{{/if}}
 <div class="ui segment">
     <div class="item login">
       {{#if currentUser}}
