@@ -2,6 +2,8 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import '../imports/ui/body.js';
 import '../imports/startup/accounts-config.js';
+import { Advertisers } from '../imports/api/advertisers.js';
+
 //import 'main.css';
 $(document).ready(function() {
 
@@ -14,6 +16,9 @@ $(document).ready(function() {
         if(progression == 100) {
             clearInterval(progress);
             alert('done');
+            // var advertiser = Advertisers.find({}, {limit: 1});
+            // alert(advertiser);
+            // Advertisers.update({});
         } else
             $('#bid-timer').progress({
   				percent: (30 - ( seconds % 30))*(100/30),
