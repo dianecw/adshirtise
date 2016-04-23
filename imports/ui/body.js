@@ -31,17 +31,18 @@ Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('userData');
 });
 
+$.validator.addMethod( 'enoughMoney', ( money ) => {
+  user = (Meteor.users.find({'username': Meteor.user().username}).fetch())[0];
+  return user.money >= money ? true : false;
+});
+
 Template.bid_steps.onRendered(function(){
     advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
-    user = (Meteor.users.find({'username': Meteor.user().username}).fetch())[0];
-
     if (advertiser.population !== undefined) {
       min_amount = advertiser.population; // some calculation should go here
     } else {
       min_amount = 0;
     }
-
-    max_amount = user.money;
 
     $('.new-bid').validate({
         rules: {
@@ -51,18 +52,19 @@ Template.bid_steps.onRendered(function(){
             },
             text: {
               min: min_amount,
-              max: max_amount,
+              enoughMoney: true,
               required: true
             }
-
         },
         messages: {
           text: {
-            max: "You do not have enough money to place this bid!"
+            enoughMoney: "You do not have enough money to place this bid!"
           }
         }
     });
 });
+
+
 
 Template.bid_steps.helpers({
    min_bid() {
