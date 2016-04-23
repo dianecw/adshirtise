@@ -42,6 +42,9 @@
       Want to join the fun? 
       {{/if}}
       {{> loginButtons}}
+      {{#if currentUser}}
+      . You have <b>${{money(currentUser.username)}}</b>.
+      {{/if}}
     </div>
 </div>
   </div>

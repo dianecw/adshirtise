@@ -28,15 +28,21 @@ Template.user_menu.events({
 Template.body.onCreated(function bodyOnCreated() {
   //this.state = new ReactiveDict();
   Meteor.subscribe('bids');
+  Meteor.subscribe('userData');
 });
 
 Template.bid_steps.onRendered(function(){
     advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
+    user = (Meteor.users.find({'username': Meteor.user().username}).fetch())[0];
+
     if (advertiser.population !== undefined) {
       min_amount = advertiser.population; // some calculation should go here
     } else {
       min_amount = 0;
     }
+
+    max_amount = user.money;
+
     $('.new-bid').validate({
         rules: {
             msgtext: {
@@ -45,9 +51,15 @@ Template.bid_steps.onRendered(function(){
             },
             text: {
               min: min_amount,
+              max: max_amount,
               required: true
             }
 
+        },
+        messages: {
+          text: {
+            max: "You do not have enough money to place this bid!"
+          }
         }
     });
 });
@@ -60,6 +72,14 @@ Template.bid_steps.helpers({
     } else {
       return 0;
     }
+  },
+});
+
+Template.user_menu.helpers({
+  money(username1) {
+    curr_user = Meteor.users.find({"username": username1});
+    curr_user = curr_user.fetch()[0]
+    return curr_user.money;
   },
 });
 

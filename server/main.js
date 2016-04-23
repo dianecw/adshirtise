@@ -31,7 +31,6 @@ if (Meteor.isServer) {
     {
       seconds = new Date().getSeconds()
       percentage = (30 - ( seconds % 30))*(100/30);
-      // console.log(percentage);
       if (percentage == 100) {
         Fiber(function() {
           advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
@@ -41,9 +40,23 @@ if (Meteor.isServer) {
             msg = "No current ad."
           } else {
             msg = best_bid.msg;
+
+            // Take money away from winning bidder.
+            user = (Meteor.users.find({'username': best_bid.username}).fetch())[0];
+            Meteor.users.update(user._id, {$set: {money: user.money - best_bid.value}});
           }
           Advertisers.update(advertiser._id, {$set: {curr_msg: msg, round: Number(advertiser.round) + 1}});
 
+          // Give random amount of money ($1-$500) to every user... Worried this could get really slow...
+          var users_cursor = Meteor.users.find().forEach(function(obj){
+            if (obj.money === undefined) {
+              new_money = Math.floor((Math.random() * 100) + 1);
+            } else {
+              new_money = obj.money + Math.floor((Math.random() * 100) + 1);
+            }
+            Meteor.users.update(obj._id, {$set: {money: new_money}}); 
+          })
+ 
         }).run();
         
       }
@@ -52,6 +65,7 @@ if (Meteor.isServer) {
 
 Accounts.onCreateUser(function(options, user) {
     //pass the surname in the options
+    user.money = Math.floor((Math.random() * 100) + 1);
     user.avatar = "/images/1.jpg";
     if (options.profile)
       user.profile = options.profile;
@@ -59,6 +73,13 @@ Accounts.onCreateUser(function(options, user) {
     //user.profile['avatar'] = "/images/1.jpg"
 
     //return user
+});
+
+Meteor.publish('userData', function() {
+  if(!this.userId) return null;
+  return Meteor.users.find(this.userId, {fields: {
+    'money': 1,
+  }});
 });
 
 Api.addRoute('advertisers/:id/population', {authRequired: false}, {
