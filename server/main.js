@@ -61,6 +61,11 @@ Accounts.onCreateUser(function(options, user) {
     //return user
 });
 
+Api.addRoute('advertisers/:id/population', {authRequired: false}, {
+  put: function () {
+    return Advertisers.update(this.urlParams.id, {$set: {population: this.bodyParams.population}});
+  }
+});
 /**
   // Generates: POST on /api/users and GET, DELETE /api/users/:id for
   // Meteor.users collection
