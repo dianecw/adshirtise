@@ -7,6 +7,17 @@ import { Advertisers } from '../imports/api/advertisers.js';
 //import 'main.css';
 $( document ).ready(function() {
 
+
+    //read only star ratings
+    $('.ui.rating')
+        .rating('disable')
+      ;
+
+    //popups
+    $('.icon')
+      .popup()
+    ;
+
     var progression = 0,
     progress = setInterval(function() 
     {
