@@ -28,6 +28,61 @@ Template.user_menu.events({
 Template.body.onCreated(function bodyOnCreated() {
   //this.state = new ReactiveDict();
   Meteor.subscribe('bids');
+  Meteor.subscribe('userData');
+});
+
+$.validator.addMethod( 'enoughMoney', ( money ) => {
+  user = (Meteor.users.find({'username': Meteor.user().username}).fetch())[0];
+  return user.money >= money ? true : false;
+});
+
+Template.bid_steps.onRendered(function(){
+    advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
+    if (advertiser.population !== undefined) {
+      min_amount = advertiser.population; // some calculation should go here
+    } else {
+      min_amount = 0;
+    }
+
+    $('.new-bid').validate({
+        rules: {
+            msgtext: {
+              minlength: 1,
+              required: true
+            },
+            text: {
+              min: min_amount,
+              enoughMoney: true,
+              required: true
+            }
+        },
+        messages: {
+          text: {
+            enoughMoney: "You do not have enough money to place this bid!"
+          }
+        }
+    });
+});
+
+
+
+Template.bid_steps.helpers({
+   min_bid() {
+    advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
+    if (advertiser.population !== undefined) {
+      return advertiser.population; // some calculation should go here
+    } else {
+      return 0;
+    }
+  },
+});
+
+Template.user_menu.helpers({
+  money(username1) {
+    curr_user = Meteor.users.find({"username": username1});
+    curr_user = curr_user.fetch()[0]
+    return curr_user.money;
+  },
 });
 
 Template.body.helpers({
@@ -42,7 +97,6 @@ Template.body.helpers({
 });
 
 Template.bid.helpers({
-
   avatar_image(username1) {
     curr_user = Meteor.users.find({"username": username1});
     curr_user = curr_user.fetch()[0]
@@ -71,7 +125,7 @@ Template.body.events({
 
     var advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
     Bids.insert({
-      value: value,
+      value: Number(value),
       createdAt: new Date(), // current time
       owner: Meteor.userId(),
       username: Meteor.user().username,
