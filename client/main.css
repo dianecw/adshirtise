@@ -20,6 +20,8 @@
   }
   .header.item.title{
     font-size: 1.5em;
+    width:10em !important;
+    color:gray;
   }
   .ui.container{
     margin-left: 0px !important;
@@ -58,4 +60,13 @@
  
    .item.login{
     padding-top:0.2em;
+  }
+
+  .topbar.logo{
+    width:8em !important;
+  }
+
+  #topbar{
+    background-color: white;
+    border-bottom: 1px solid rgba(34, 36, 38, 0.15);
   }
