@@ -74,3 +74,39 @@
   .ui.grey.header.bid-info {
     margin-top: 0em;
   }
+
+.ui.segment.grid.bidding-profile {
+  cursor: pointer;
+}
+
+.blackout {
+  background-color:#000;
+  height:100%;
+  width:100%;
+  position: fixed;
+  display:none;
+  top:0;
+  left:0;
+  z-index:100;
+  opacity: 0;
+  transition: opacity 2s, display 2s;
+  cursor:pointer;
+}
+.msgbox {
+  width:70%;
+  height:70%;
+  position:fixed;
+  top:20%;
+  left:15%;
+  z-index:101;
+  display:none;
+  /*margin-left: 20%;*/
+}
+.review{
+  font-size:.2em;
+}
+.ui .large .feed .reviews{
+  height:70%;
+  overflow: auto;
+}
+

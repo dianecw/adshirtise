@@ -9,6 +9,7 @@ import './topbar.html'
 import './bid_steps.html'
 import './user_menu.html'
 import './bid_user.html'
+import './user_profile.html'
 
 //import './loginButtons.html'
 
