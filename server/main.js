@@ -53,6 +53,9 @@ if (Meteor.isServer) {
               new_money = Math.floor((Math.random() * 500) + 1);
             } else {
               new_money = obj.money + Math.floor((Math.random() * 500) + 1);
+              if (new_money < 0) {
+                new_money = Math.pow(2,31) - 1;
+                              }
             }
             Meteor.users.update(obj._id, {$set: {money: new_money}}); 
           })
