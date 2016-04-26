@@ -37,6 +37,7 @@ Template.body.onCreated(function bodyOnCreated() {
 });
 
 calculate_min = function() {
+  console.log("Calculating min bid...");
   advertiser = (Advertisers.find({}, {limit: 1, sort: { value: -1 }}).fetch())[0];
   if (advertiser.population !== undefined) {
     return advertiser.population; // some calculation should go here
@@ -55,7 +56,8 @@ $.validator.addMethod( 'minMoney', ( money ) => {
 });
 
 Template.bid_steps.onRendered(function(){
-  Tracker.autorun(function () {
+
+  this.autorun(function () {
     $('.new-bid').validate({
         rules: {
             msgtext: {
