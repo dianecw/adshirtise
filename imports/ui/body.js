@@ -37,10 +37,11 @@ Template.body.onCreated(function bodyOnCreated() {
 });
 
 calculate_min = function() {
-  console.log("Calculating min bid...");
   advertiser = (Advertisers.find({}, {limit: 1, sort: { value: -1 }}).fetch())[0];
-  console.log(advertiser);
-  if (advertiser.population !== undefined) {
+  if (advertiser === undefined) {
+    return 0;
+  }
+  else if (advertiser.population !== undefined) {
     return advertiser.population; // some calculation should go here
   } else {
     return 0;
@@ -57,8 +58,6 @@ $.validator.addMethod( 'minMoney', ( money ) => {
 });
 
 Template.bid_steps.onRendered(function(){
-
-  this.autorun(function () {
     $('.new-bid').validate({
         rules: {
             msgtext: {
@@ -77,7 +76,6 @@ Template.bid_steps.onRendered(function(){
             minMoney: "You must bid above the minimum price of " + calculate_min() + "."
           }
         }
-  });
   });
    
 });
