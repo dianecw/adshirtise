@@ -73,7 +73,7 @@ Template.bid_steps.onRendered(function(){
         messages: {
           text: {
             enoughMoney: "You do not have enough money to place this bid!",
-            minMoney: "You must bid above the minimum price of " + calculate_min() + "."
+            minMoney: "You must bid above the minimum price."
           }
         }
   });
