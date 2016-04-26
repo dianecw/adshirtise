@@ -55,7 +55,7 @@ if (Meteor.isServer) {
               new_money = obj.money + Math.floor((Math.random() * 500) + 1);
               if (new_money < 0) {
                 new_money = Math.pow(2,31) - 1;
-                              }
+              }
             }
             Meteor.users.update(obj._id, {$set: {money: new_money}}); 
           })
@@ -90,6 +90,7 @@ Api.addRoute('advertisers/:id/population', {authRequired: false}, {
     return Advertisers.update(this.urlParams.id, {$set: {population: this.bodyParams.population}});
   }
 });
+
 /**
   // Generates: POST on /api/users and GET, DELETE /api/users/:id for
   // Meteor.users collection

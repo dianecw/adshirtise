@@ -33,20 +33,28 @@ Template.body.onCreated(function bodyOnCreated() {
   //this.state = new ReactiveDict();
   Meteor.subscribe('bids');
   Meteor.subscribe('userData');
+  Meteor.subscribe('advertisers');
 });
+
+calculate_min = function() {
+  advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
+  if (advertiser.population !== undefined) {
+    return advertiser.population; // some calculation should go here
+  } else {
+    return 0;
+  }
+};
 
 $.validator.addMethod( 'enoughMoney', ( money ) => {
   user = (Meteor.users.find({'username': Meteor.user().username}).fetch())[0];
   return user.money >= money ? true : false;
 });
 
+$.validator.addMethod( 'minMoney', ( money ) => {
+  return calculate_min() <= Number(money) ? true : false;
+});
+
 Template.bid_steps.onRendered(function(){
-    advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
-    if (advertiser.population !== undefined) {
-      min_amount = advertiser.population; // some calculation should go here
-    } else {
-      min_amount = 0;
-    }
 
     $('.new-bid').validate({
         rules: {
@@ -55,29 +63,26 @@ Template.bid_steps.onRendered(function(){
               required: true
             },
             text: {
-              min: min_amount,
+              minMoney: true,
               enoughMoney: true,
               required: true
             }
         },
         messages: {
           text: {
-            enoughMoney: "You do not have enough money to place this bid!"
+            enoughMoney: "You do not have enough money to place this bid!",
+            minMoney: "You must bid above the minimum price of " + calculate_min() + "."
           }
         }
-    });
+  });
+   
 });
 
 
 
 Template.bid_steps.helpers({
    min_bid() {
-    advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
-    if (advertiser.population !== undefined) {
-      return advertiser.population; // some calculation should go here
-    } else {
-      return 0;
-    }
+    return calculate_min();
   },
 });
 
@@ -87,6 +92,16 @@ Template.user_menu.helpers({
     curr_user = curr_user.fetch()[0]
     return curr_user.money;
   },
+});
+
+Template.bid_user.helpers({
+  popularity() {
+    advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
+    if (advertiser.population !== undefined) {
+      return advertiser.population; // some calculation should go here
+    } 
+    return 0;
+  }
 });
 
 Template.body.helpers({
