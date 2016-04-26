@@ -37,7 +37,7 @@ Template.body.onCreated(function bodyOnCreated() {
 });
 
 calculate_min = function() {
-  advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
+  advertiser = (Advertisers.find({}, {limit: 1, sort: { value: -1 }}).fetch())[0];
   if (advertiser.population !== undefined) {
     return advertiser.population; // some calculation should go here
   } else {
@@ -55,7 +55,7 @@ $.validator.addMethod( 'minMoney', ( money ) => {
 });
 
 Template.bid_steps.onRendered(function(){
-
+  Tracker.autorun(function () {
     $('.new-bid').validate({
         rules: {
             msgtext: {
@@ -74,6 +74,7 @@ Template.bid_steps.onRendered(function(){
             minMoney: "You must bid above the minimum price of " + calculate_min() + "."
           }
         }
+  });
   });
    
 });
