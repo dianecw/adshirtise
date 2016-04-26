@@ -39,6 +39,7 @@ Template.body.onCreated(function bodyOnCreated() {
 calculate_min = function() {
   console.log("Calculating min bid...");
   advertiser = (Advertisers.find({}, {limit: 1, sort: { value: -1 }}).fetch())[0];
+  console.log(advertiser);
   if (advertiser.population !== undefined) {
     return advertiser.population; // some calculation should go here
   } else {
