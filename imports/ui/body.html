@@ -25,8 +25,14 @@
         <ol class="ui list leaderboard">
           {{#each bids}}
             {{> bid}}
+          {{else}}
+            <div class="no-money">
+              <img class="ui image no-money" src="/images/no-money.png">
+              <p>No bids yet this round.</p>
+            </div>
           {{/each}}
         </ol>
+
         <!--<div class="ui divider"></div> -->
       </div>
       </div>
