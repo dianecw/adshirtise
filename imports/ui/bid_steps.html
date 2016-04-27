@@ -1,10 +1,30 @@
 <template name="bid_steps">
 <h4 class="">1. Choose an ad</h4>
-
-<form class="new-bid">
-  <div class="ui input">
-    <input type="text" id="msg" name="msgtext" placeholder="Your custom message"/>
+  <form class="new-bid">
+  <div class="ui top attached tabular ad-menu menu">
+    <a class="active item" data-tab="first">New</a>
+    <a class="item" data-tab="second">Saved</a>
+    <a class="item" data-tab="third">Explore</a>
   </div>
+  <div class="ui bottom attached active tab segment" data-tab="first">
+    <div class="ui input">
+      <input type="text" id="msg" name="msgtext" placeholder="Your custom message"/>
+    </div>
+    <br>
+    <div class="ui checkbox" id="save_ad">
+      <input type="checkbox" id="save_ad_checkbox" name="save_ad">
+      <label>Save this ad</label>
+    </div>
+  </div>
+  <div class="ui bottom attached tab segment" data-tab="second">
+    {{>user_ads}}
+  </div>
+  <div class="ui bottom attached tab segment" data-tab="third">
+    Third
+  </div>
+
+
+
   <h4 class="">2. Enter your best bid (Min: {{min_bid}})</h4>
   <div class="ui labeled input">
     <div class="ui label">$</div>

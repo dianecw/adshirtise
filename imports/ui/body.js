@@ -10,9 +10,9 @@ import './bid_steps.html'
 import './user_menu.html'
 import './bid_user.html'
 import './user_profile.html'
+import './user_ads.html'
 
 //import './loginButtons.html'
-
 
 Template.user_menu.events({
     'click .dropdown.user .item': function(e) {
@@ -48,6 +48,8 @@ calculate_min = function() {
   }
 };
 
+
+
 $.validator.addMethod( 'enoughMoney', ( money ) => {
   user = (Meteor.users.find({'username': Meteor.user().username}).fetch())[0];
   return user.money >= money ? true : false;
@@ -58,6 +60,10 @@ $.validator.addMethod( 'minMoney', ( money ) => {
 });
 
 Template.bid_steps.onRendered(function(){
+
+  $('.ad-menu.menu .item')
+  .tab({history:false});
+  
     $('.new-bid').validate({
         rules: {
             msgtext: {
@@ -80,7 +86,17 @@ Template.bid_steps.onRendered(function(){
    
 });
 
-
+Template.user_ads.helpers({
+  user_ads() {
+    curr_user = Meteor.users.find({"username": Meteor.user().username});
+    curr_user = curr_user.fetch()[0]
+    if ('profile' in curr_user){
+      return curr_user.profile.ads;
+    }else {
+      return None;
+    }
+  },
+});
 
 Template.bid_steps.helpers({
    min_bid() {
@@ -153,6 +169,22 @@ Template.body.events({
       msg: msg,
       round: advertiser.round});
 
+    var save_ad = document.getElementById('save_ad_checkbox').checked
+    if (save_ad) {
+    curr_user = Meteor.users.find({_id:Meteor.user()._id}).fetch()[0];
+    curr_ads_count = curr_user.profile.ads_count
+    if (curr_ads_count==null) {
+    Meteor.users.update({_id:Meteor.user()._id}, 
+      { $set: {"profile.ads_count": 1 }})
+    }else{
+    Meteor.users.update({_id:Meteor.user()._id}, 
+      { $set: {"profile.ads_count": curr_ads_count + 1}})
+    }
+
+    //save the ad!
+    Meteor.users.update({_id:Meteor.user()._id}, 
+        { $push: {"profile.ads": { _id: Meteor.users.find({_id:Meteor.user()._id}).fetch()[0].profile.ads_count, msg: msg}} });
+  }
 
  
     // Clear form

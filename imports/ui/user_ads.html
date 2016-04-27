@@ -1,0 +1,18 @@
+<template name="user_ads">
+  <div class="ui list">
+    {{#each user_ads}}
+      {{> ad}}
+    {{else}}
+        <p>No saved ads yet.</p>
+    {{/each}}
+  </div>
+</template>
+  
+
+<template name="ad">
+
+  <li class="item">
+      <p>{{_id}}: {{msg}}</p>
+      <!--<div class="header">{{username}}</div>-->
+  </li>
+</template>

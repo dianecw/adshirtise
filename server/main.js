@@ -70,6 +70,7 @@ Accounts.onCreateUser(function(options, user) {
     //pass the surname in the options
     user.money = Math.floor((Math.random() * 500) + 1);
     user.avatar = "/images/1.jpg";
+    user.ads = [];
     if (options.profile)
       user.profile = options.profile;
     return user;

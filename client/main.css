@@ -7,7 +7,7 @@
     margin-right: 1.5em;
   }
   .main.container {
-    margin-top: 7em;
+    margin-top: 5.3em;
     margin-left: 1.5em;
     margin-right: 1.5em;
   }
@@ -130,5 +130,9 @@
 #user-message-header{
   margin-top: 0.2em;
   margin-bottom:0.7em;
+}
+
+#save_ad{
+  margin-top:0.6em;
 }
 
