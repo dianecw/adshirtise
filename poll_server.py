@@ -9,7 +9,7 @@ import re
 import json
 import ast
 
-CENSUS_API_KEY = ""
+CENSUS_API_KEY = "4e9dd1e9a1db5b4a932ebf8b25e2fb8d18e23cc"
 
 STATE_TO_CODE = {'Mississippi': '28', 'Northern Mariana Islands': '69', 'U.S. Virgin Islands': '78', 'Oklahoma': '40', 'Delaware': '10', 'Minnesota': '27', 'Illinois': '17', 'Arkansas': '05', 'New Mexico': '35', 'Indiana': '18', 'Maryland': '24', 'Louisiana': '22', 'Idaho': '16', 'Wyoming': '56', 'Tennessee': '47', 'Arizona': '04', 'Iowa': '19', 'STATE_NAME': 'STATE', 'Michigan': '26', 'Kansas': '20', 'Utah': '49', 'Virginia': '51', 'Oregon': '41', 'Connecticut': '09', 'Montana': '30', 'California': '06', 'Massachusetts': '25', 'West Virginia': '54', 'South Carolina': '45', 'New Hampshire': '33', 'Wisconsin': '55', 'Vermont': '50', 'Georgia': '13', 'North Dakota': '38', 'Pennsylvania': '42', 'Puerto Rico': '72', 'Florida': '12', 'Alaska': '02', 'Kentucky': '21', 'Hawaii': '15', 'Nebraska': '31', 'Missouri': '29', 'Ohio': '39', 'Alabama': '01', 'New York': '36', 'American Samoa': '60', 'South Dakota': '46', 'Colorado': '08', 'New Jersey': '34', 'Guam': '66', 'Washington': '53', 'U.S. Minor Outlying Islands': '74', 'North Carolina': '37', 'District of Columbia': '11', 'Texas': '48', 'Nevada': '32', 'Maine': '23', 'Rhode Island': '44'}
 
@@ -70,24 +70,6 @@ def make_text_img(text):
         x = x + font.getsize(t)[0]
      
     im.save("test.ppm")
-
-def send_text(bid, rate):
-    # Use sms gateway provided by mobile carrier:
-    # at&t:     number@mms.att.net
-    # t-mobile: number@tmomail.net
-    # verizon:  number@vtext.com
-    # sprint:   number@page.nextel.com
-
-    fromaddr = "radar.alert.cm@gmail.com"
-    toaddr = "5103663458@vtext.com"
-
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(fromaddr, "sechromojuluming")
-
-    text = "Today you made $" + str(bid*rate) + "!"
-    server.sendmail(fromaddr, toaddr, text)
-    server.quit()
 
 #os.system("./led-matrix 1 test.ppm")
 

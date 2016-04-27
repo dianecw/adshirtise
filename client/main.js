@@ -3,6 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import '../imports/ui/body.js';
 import '../imports/startup/accounts-config.js';
 import { Advertisers } from '../imports/api/advertisers.js';
+import { Bids } from '../imports/api/bids.js';
 
 //import 'main.css';
 $( document ).ready(function() {
@@ -41,16 +42,24 @@ $( document ).ready(function() {
     	seconds = new Date().getSeconds()
         //$('#progress .progress-text').text(progression + '%');
         //$('#progress .progress-bar').css({'width':progression+'%'});
+        progression = (60 - ( seconds % 60))*(100/60);
         if(progression == 100) {
-            clearInterval(progress);
-            alert('done');
+          advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
+          winning_user = (Bids.find({round: advertiser.round}, {
+            sort: { value: -1 },
+            limit: 1}).fetch())[0];
+          if (winning_user !== undefined && winning_user.username === Meteor.user().username) {
+            $('.small.modal')
+              .modal('show')
+            ;
+          }
             // var advertiser = Advertisers.find({}, {limit: 1});
             // alert(advertiser);
             // Advertisers.update({});
-        } else
-            $('#bid-timer').progress({
-  				percent: (60 - ( seconds % 60))*(100/60),
-  				showActivity: false
+        } 
+        $('#bid-timer').progress({
+  			percent: (60 - ( seconds % 60))*(100/60),
+  			showActivity: false
 			});
 			$('#bid-timer-label').text((60 - ( seconds % 60)).toString() + "s");
 
