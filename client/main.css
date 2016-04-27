@@ -28,7 +28,7 @@
     margin-right: 0px !important;
   }
   .bid.progress{
-    margin-right: 2em;
+    margin-right:1em;
   }
 
   .leaderboard{
@@ -113,12 +113,22 @@
 }
 
 .image.no-money{
-  height:8em;
+  height:7em;
   margin:auto;
 }
 
 .no-money{
   margin:1em;
   text-align:center;
+}
+
+#flame-icon{
+  width:1.2em;
+  margin-bottom:0.6em;
+  margin-right:0;
+}
+#user-message-header{
+  margin-top: 0.2em;
+  margin-bottom:0.7em;
 }
 
