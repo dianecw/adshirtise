@@ -113,12 +113,21 @@
 }
 
 .image.no-money{
-  height:8em;
+  height:7em;
   margin:auto;
 }
 
 .no-money{
   margin:1em;
   text-align:center;
+}
+
+#bid-user-pic{
+  max-width: 8em;
+}
+
+#flame-icon{
+  width:1.2em;
+  margin-bottom:0.6em;
 }
 
