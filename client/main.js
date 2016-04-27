@@ -32,7 +32,7 @@ $( document ).ready(function() {
       ;
 
     //popups
-    $('.icon')
+    $('.flame-icon')
       .popup()
     ;
 
