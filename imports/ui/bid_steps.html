@@ -2,9 +2,9 @@
 <h4 class="">1. Choose an ad</h4>
   <form class="new-bid">
   <div class="ui top attached tabular ad-menu menu">
-    <a class="active item" data-tab="first">New</a>
-    <a class="item" data-tab="second">Saved</a>
-    <a class="item" data-tab="third">Explore</a>
+    <a class="ad-menu active item" data-tab="first">New</a>
+    <a class="ad-menu item" data-tab="second">Saved</a>
+    <a class="ad-menu item" data-tab="third">Explore</a>
   </div>
   <div class="ui bottom attached active tab segment" data-tab="first">
     <div class="ui input">
@@ -19,7 +19,7 @@
   <div class="ui bottom attached tab segment" data-tab="second">
     {{>user_ads}}
   </div>
-  <div class="ui bottom attached tab segment" data-tab="third">
+  <div class="ui bottom attached tab segment" id="explore-ads" data-tab="third">
     Third
   </div>
 

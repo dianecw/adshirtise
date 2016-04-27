@@ -136,3 +136,11 @@
   margin-top:0.6em;
 }
 
+#explore-ads{
+  border-top:none;
+}
+
+.ad-menu.item{
+  margin-bottom: -2px;
+}
+
