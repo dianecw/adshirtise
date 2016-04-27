@@ -49,10 +49,10 @@ $( document ).ready(function() {
             // Advertisers.update({});
         } else
             $('#bid-timer').progress({
-  				percent: (30 - ( seconds % 30))*(100/30),
+  				percent: (60 - ( seconds % 60))*(100/60),
   				showActivity: false
 			});
-			$('#bid-timer-label').text((30 - ( seconds % 30)).toString() + "s");
+			$('#bid-timer-label').text((60 - ( seconds % 60)).toString() + "s");
 
     }, 1000);
 

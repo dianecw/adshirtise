@@ -30,7 +30,7 @@ if (Meteor.isServer) {
   setInterval(function() 
     {
       seconds = new Date().getSeconds()
-      percentage = (30 - ( seconds % 30))*(100/30);
+      percentage = (60 - ( seconds % 60))*(100/60);
       if (percentage == 100) {
         Fiber(function() {
           advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
