@@ -3,7 +3,7 @@ import { Template } from 'meteor/templating';
 import { Bids } from '..//api/bids.js';
 import { Advertisers } from '..//api/advertisers.js';
 
- 
+import './bid_steps.js'
 import './body.html';
 import './topbar.html'
 import './bid_steps.html'
@@ -33,6 +33,13 @@ Template.user_ads.events({
   $(".delete-saved").click(function(e){
     Meteor.users.update({_id:Meteor.user()._id}, 
         { $pull: {"profile.ads": { _id: parseInt(this.id)}} });
+  });
+
+  $(".saved.item").click(function(e){
+    $(".saved.item").removeClass("saved-active");
+    $(this).addClass("saved-active");
+    $(".saved.item").removeClass("active");
+    $(this).addClass("active");
   });
 
   }
@@ -68,32 +75,7 @@ $.validator.addMethod( 'minMoney', ( money ) => {
   return calculate_min() <= Number(money) ? true : false;
 });
 
-Template.bid_steps.onRendered(function(){
 
-  $('.ad-menu.menu .item')
-  .tab({history:false});
-
-    $('.new-bid').validate({
-        rules: {
-            msgtext: {
-              minlength: 1,
-              required: true
-            },
-            text: {
-              minMoney: true,
-              enoughMoney: true,
-              required: true
-            }
-        },
-        messages: {
-          text: {
-            enoughMoney: "You do not have enough money to place this bid!",
-            minMoney: "You must bid above the minimum price."
-          }
-        }
-  });
-   
-});
 
 Template.user_ads.helpers({
   user_ads() {
@@ -162,11 +144,19 @@ Template.body.events({
   'submit .new-bid'(event) {
     // Prevent default browser form submit
     event.preventDefault();
+
+    var currentTab = $('.active.ad-menu').attr('data-tab')
  
+    
     // Get value from form element
     const target = event.target;
     const value = target.text.value;
+
+    if (currentTab == 'new-text'){
     var msg = document.getElementById('msg').value;
+    } else if (currentTab == 'saved'){
+    var msg = $('.saved-active').find('.msg').text().trim()
+    }
    
     // Insert a task into the collection
 

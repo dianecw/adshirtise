@@ -2,12 +2,12 @@
 <h4 class="">1. Choose an ad</h4>
   <form class="new-bid">
   <div class="ui pointing secondary tabular ad-menu menu">
-    <a class="ad-menu active item" data-tab="first">New Text Ad</a>
-    <a class="ad-menu item" data-tab="second">New Image Ad</a>
-    <a class="ad-menu item" data-tab="third">Saved</a>
-    <a class="ad-menu item" data-tab="fourth">Explore</a>
+    <a class="ad-menu active item" data-tab="new-text">New Text Ad</a>
+    <a class="ad-menu item" data-tab="new-image">New Image Ad</a>
+    <a class="ad-menu item" data-tab="saved">Saved</a>
+    <a class="ad-menu item" data-tab="explore">Explore</a>
   </div>
-  <div class="ui active basic tab segment" data-tab="first">
+  <div class="ui active basic tab segment" data-tab="new-text">
         <div class="ui input">
           <input type="text" id="msg" name="msgtext" placeholder="Your custom message"/>
         </div>
@@ -18,13 +18,13 @@
         </div>
 
   </div>
-  <div class="ui basic tab segment" data-tab="second">
+  <div class="ui basic tab segment" data-tab="new-image">
     
   </div>
-  <div class="ui basic tab segment" data-tab="third">
+  <div class="ui basic tab segment" data-tab="saved">
     {{>user_ads}}
   </div>
-  <div class="ui basic tab segment" id="explore-ads" data-tab="fourth">
+  <div class="ui basic tab segment" id="explore-ads" data-tab="explore">
     Fourth
   </div>
 

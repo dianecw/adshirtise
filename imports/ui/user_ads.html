@@ -10,12 +10,14 @@
   
 <template name="ad">
 
-  <a class="item">
+  <a class="saved item">
     <div class="ui horizontal label">
       Text
     </div>
     <!--{{_id}}: -->
-    "{{msg}}"
+    <span class="msg">
+    {{msg}}
+    </span>
     <div class="right floated content">
         <i class="remove icon delete-saved" id={{_id}}></i>
         </div>
