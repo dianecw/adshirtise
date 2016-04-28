@@ -26,7 +26,16 @@ Template.user_menu.events({
       //console.log(Meteor.user().profile.avatar);
     });
   }
+});
+Template.user_ads.events({
+'click': function(e){
 
+  $(".delete-saved").click(function(e){
+    Meteor.users.update({_id:Meteor.user()._id}, 
+        { $pull: {"profile.ads": { _id: parseInt(this.id)}} });
+  });
+
+  }
   });
  
 Template.body.onCreated(function bodyOnCreated() {
@@ -63,7 +72,7 @@ Template.bid_steps.onRendered(function(){
 
   $('.ad-menu.menu .item')
   .tab({history:false});
-  
+
     $('.new-bid').validate({
         rules: {
             msgtext: {
@@ -96,6 +105,7 @@ Template.user_ads.helpers({
       return None;
     }
   },
+
 });
 
 Template.bid_steps.helpers({

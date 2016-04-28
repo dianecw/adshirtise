@@ -1,5 +1,5 @@
 <template name="user_ads">
-  <div class="ui list">
+  <div class="ui divided selection list">
     {{#each user_ads}}
       {{> ad}}
     {{else}}
@@ -8,11 +8,19 @@
   </div>
 </template>
   
-
 <template name="ad">
 
-  <li class="item">
-      <p>{{_id}}: {{msg}}</p>
+  <a class="item">
+    <div class="ui horizontal label">
+      Text
+    </div>
+    <!--{{_id}}: -->
+    "{{msg}}"
+    <div class="right floated content">
+        <i class="remove icon delete-saved" id={{_id}}></i>
+        </div>
+
+  </a>
+      
       <!--<div class="header">{{username}}</div>-->
-  </li>
 </template>

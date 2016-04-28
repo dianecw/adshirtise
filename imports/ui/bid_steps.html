@@ -1,26 +1,31 @@
 <template name="bid_steps">
 <h4 class="">1. Choose an ad</h4>
   <form class="new-bid">
-  <div class="ui top attached tabular ad-menu menu">
-    <a class="ad-menu active item" data-tab="first">New</a>
-    <a class="ad-menu item" data-tab="second">Saved</a>
-    <a class="ad-menu item" data-tab="third">Explore</a>
+  <div class="ui pointing secondary tabular ad-menu menu">
+    <a class="ad-menu active item" data-tab="first">New Text Ad</a>
+    <a class="ad-menu item" data-tab="second">New Image Ad</a>
+    <a class="ad-menu item" data-tab="third">Saved</a>
+    <a class="ad-menu item" data-tab="fourth">Explore</a>
   </div>
-  <div class="ui bottom attached active tab segment" data-tab="first">
-    <div class="ui input">
-      <input type="text" id="msg" name="msgtext" placeholder="Your custom message"/>
-    </div>
-    <br>
-    <div class="ui checkbox" id="save_ad">
-      <input type="checkbox" id="save_ad_checkbox" name="save_ad">
-      <label>Save this ad</label>
-    </div>
+  <div class="ui active basic tab segment" data-tab="first">
+        <div class="ui input">
+          <input type="text" id="msg" name="msgtext" placeholder="Your custom message"/>
+        </div>
+        <br>
+        <div class="ui checkbox" id="save_ad">
+          <input type="checkbox" id="save_ad_checkbox" name="save_ad">
+          <label>Save this ad</label>
+        </div>
+
   </div>
-  <div class="ui bottom attached tab segment" data-tab="second">
+  <div class="ui basic tab segment" data-tab="second">
+    
+  </div>
+  <div class="ui basic tab segment" data-tab="third">
     {{>user_ads}}
   </div>
-  <div class="ui bottom attached tab segment" id="explore-ads" data-tab="third">
-    Third
+  <div class="ui basic tab segment" id="explore-ads" data-tab="fourth">
+    Fourth
   </div>
 
 
