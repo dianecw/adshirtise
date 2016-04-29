@@ -288,6 +288,9 @@ function hex2rgba(hex) {
       [].forEach.call(document.querySelectorAll('.rainbow-pixel-canvas'), function (canvas) {
         canvas.width = 32*pixelSize+1;
         canvas.height = 32*pixelSize+1;
+        var context = canvas.context;
+        var rgba_color = hex2rgba("#000000");
+        floodfill(0, 0, rgba_color, context);
       });
     }
     resizeCanvases();

@@ -89,7 +89,7 @@ Meteor.publish('userData', function() {
 
 Api.addRoute('advertisers/:id/population', {authRequired: false}, {
   put: function () {
-    return Advertisers.update(this.urlParams.id, {$set: {population: this.bodyParams.population}});
+    return Advertisers.update(this.urlParams.id, {$set: {face_img: this.bodyParams.image, population: this.bodyParams.population}});
   }
 });
 
