@@ -64,7 +64,7 @@ var floodfill = (function() {
       (targetcolor[1] === fillcolor.g) &&
       (targetcolor[2] === fillcolor.b)
     ) {
-    console.log("op2");
+    // console.log("op2");
     return false; //target is same as fill
     }
     if (
@@ -72,9 +72,9 @@ var floodfill = (function() {
       (targetcolor[1] === data[i+1]) &&
       (targetcolor[2] === data[i+2])
     ) {
-    console.log("op3");
-    console.log(targetcolor);
-    console.log(data);
+    // console.log("op3");
+    // console.log(targetcolor);
+    // console.log(data);
     return true; //target matches surface
     }
     if (
@@ -82,10 +82,19 @@ var floodfill = (function() {
       Math.abs(targetcolor[1] - data[i+1])<=tolerance &&
       Math.abs(targetcolor[2] - data[i+2])<=tolerance
     ) {
-      console.log("op4");      
+      // console.log("op4");      
     return true; //target to surface within tolerance
     }
-    console.log("none");
+    //if diagonal/corner pixels are the same
+    // if (
+    //something
+
+    // ) {
+    //   console.log("corner!");
+    //   return true;
+    // } 
+
+    // console.log("none");
     return false; //no match
   }
 
@@ -182,7 +191,7 @@ Template.bid_steps.onRendered(function() {
   });
    
   // For drawing image
-  var pixelSize = 8;
+  var pixelSize = 10;
 
   //getting canvas coords for clicks fml
 function getMousePos(canvas, evt) {
@@ -256,11 +265,6 @@ function hex2rgba(hex) {
     console.log("coords are  ", coords.x, coords.y);
 
     floodfill(Math.round(coords.x) - pixelSize / 2, Math.round(coords.y) - pixelSize / 2, rgba_color, context);
-    console.log('done');
-    context.fillStyle = '#ff0069';
-    context.fillRect(coords.x - pixelSize / 2, coords.y - pixelSize / 2,
-                       pixelSize, pixelSize);
-
   }
 
 
@@ -301,7 +305,7 @@ function hex2rgba(hex) {
     // });
 
     function resizeCanvases () {
-      //TODO make this not delete everything
+
       [].forEach.call(document.querySelectorAll('.rainbow-pixel-canvas'), function (canvas) {
         canvas.width = 32*pixelSize+1;
         canvas.height = 32*pixelSize+1;
