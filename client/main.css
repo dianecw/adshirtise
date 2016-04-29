@@ -1,6 +1,6 @@
 /* CSS declarations go here */
   body {
-    background-color: #FFFFFF;
+    background-color: #e6e6e6;
     margin-right: 1.5em;
   }
   .ui.menu .item img.logo {
@@ -101,15 +101,12 @@
   left:15%;
   z-index:101;
   display:none;
+  overflow: auto;
   /*margin-left: 20%;*/
 }
 
 .review{
   font-size:.2em;
-}
-.ui .large .feed .reviews{
-  height:70%;
-  overflow: auto;
 }
 
 .image.no-money{
@@ -144,8 +141,8 @@
 }
 
 .rainbow-pixel-canvas {
-  border: solid 2px gray;
-  
+  outline: solid 2px gray;
+  cursor: default;
   -ms-touch-action: none;
       touch-action: none;
 }
