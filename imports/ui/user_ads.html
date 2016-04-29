@@ -12,11 +12,23 @@
 
   <a class="saved item">
     <div class="ui horizontal label">
-      Text
+      
+      {{#if is_image msg}}
+        Image
+      {{else}}
+        Text
+      {{/if}}
     </div>
     <!--{{_id}}: -->
+    <span class="real-msg" style="display:none">
+      {{msg}}
+    </span>
     <span class="msg">
-    {{msg}}
+      {{#if is_image msg}}
+        <img src={{msg_to_im msg}} width="64px" height="64px">
+      {{else}}
+        {{msg}}
+      {{/if}}
     </span>
     <div class="right floated content">
         <i class="remove icon delete-saved" id={{_id}}></i>

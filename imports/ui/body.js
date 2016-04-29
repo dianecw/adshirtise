@@ -86,8 +86,16 @@ Template.user_ads.helpers({
     }else {
       return None;
     }
-  },
+  }, 
+});
 
+Template.ad.helpers({
+  is_image(msg) {
+    return msg.substring(0, 4) == "/9j/";
+  },
+  msg_to_im(msg) {
+    return "data:image/jpeg;base64,".concat(msg);
+  }
 });
 
 Template.bid_steps.helpers({
@@ -151,11 +159,18 @@ Template.body.events({
     // Get value from form element
     const target = event.target;
     const value = target.text.value;
-
+    var isText = true;
     if (currentTab == 'new-text'){
-    var msg = document.getElementById('msg').value;
+      var msg = document.getElementById('msg').value;
     } else if (currentTab == 'saved'){
-    var msg = $('.saved-active').find('.msg').text().trim()
+      var msg = $('.saved-active').find('.real-msg').text().trim()
+      isText = $('.saved-active').find('.label').text().trim() == "Text";
+    } else if (currentTab == 'new-image') {
+      isText = false;
+      canvas = $('.rainbow-pixel-canvas')[0]
+      var jpegUrl = canvas.toDataURL("image/jpeg");
+      console.log(jpegUrl);
+      var msg = jpegUrl.substring(23, jpegUrl.length);
     }
    
     // Insert a task into the collection
@@ -167,9 +182,14 @@ Template.body.events({
       owner: Meteor.userId(),
       username: Meteor.user().username,
       msg: msg,
+      isText: isText,
       round: advertiser.round});
 
-    var save_ad = document.getElementById('save_ad_checkbox').checked
+    if (isText) {
+      var save_ad = document.getElementById('save_ad_img_checkbox').checked;
+    } else {
+      var save_ad = document.getElementById('save_ad_checkbox').checked;
+    }
     if (save_ad) {
     curr_user = Meteor.users.find({_id:Meteor.user()._id}).fetch()[0];
     curr_ads_count = curr_user.profile.ads_count
