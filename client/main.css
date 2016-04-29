@@ -143,3 +143,10 @@
   margin-bottom: -2px;
 }
 
+.rainbow-pixel-canvas {
+  border: solid 2px gray;
+  
+  -ms-touch-action: none;
+      touch-action: none;
+}
+

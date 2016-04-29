@@ -18,8 +18,35 @@
         </div>
 
   </div>
+  
   <div class="ui basic tab segment" data-tab="new-image">
-    
+    <div>
+      <canvas class="rainbow-pixel-canvas"  ></canvas> 
+      <div></div>
+      <div class="ui toggle icon buttons" style="float:bottom">
+        <button class="ui red button palette"> </button>
+        <button class="ui orange button palette"> </button>
+        <button class="ui yellow button palette"> </button>
+        <button class="ui olive button palette"> </button>
+        <button class="ui green button palette"> </button>
+        <button class="ui teal button palette"> </button>
+        <button class="ui blue button palette"> </button>
+        <button class="ui violet button palette"> </button>
+        <button class="ui purple button palette"> </button>
+        <button class="ui pink button palette"> </button>
+        <button class="ui grey button palette"> </button>
+        <button class="ui black button palette"> </button>
+      </div>         
+    </div>
+    <div class="ui small basic icon toggle buttons">
+        <button class="ui trash button palette"><i class="trash icon"></i></button>
+        <button class="ui erase button palette"><i class="erase icon"></i></button>
+    </div> 
+    <div class="ui checkbox" id="save_ad">
+      <input type="checkbox" id="save_ad_checkbox" name="save_ad">
+      <label>Save this ad</label>
+    </div>
+
   </div>
   <div class="ui basic tab segment" data-tab="saved">
     {{>user_ads}}
