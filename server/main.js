@@ -51,9 +51,9 @@ if (Meteor.isServer) {
           // Give random amount of money ($1-$500) to every user... Worried this could get really slow...
           var users_cursor = Meteor.users.find().forEach(function(obj){
             if (obj.money === undefined) {
-              new_money = Math.floor((Math.random() * 500) + 1);
+              new_money = Math.floor((Math.random() * 5) + 1);
             } else {
-              new_money = obj.money + Math.floor((Math.random() * 500) + 1);
+              new_money = obj.money + Math.floor((Math.random() * 5) + 1);
               if (new_money < 0) {
                 new_money = Math.pow(2,31) - 1;
               }
@@ -69,7 +69,7 @@ if (Meteor.isServer) {
 
 Accounts.onCreateUser(function(options, user) {
     //pass the surname in the options
-    user.money = Math.floor((Math.random() * 500) + 1);
+    user.money = 50;
     user.avatar = "/images/1.jpg";
     user.ads = [];
     if (options.profile)
