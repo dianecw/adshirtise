@@ -186,9 +186,9 @@ Template.body.events({
       round: advertiser.round});
 
     if (isText) {
-      var save_ad = document.getElementById('save_ad_img_checkbox').checked;
-    } else {
       var save_ad = document.getElementById('save_ad_checkbox').checked;
+    } else {
+      var save_ad = document.getElementById('save_ad_img_checkbox').checked;
     }
     if (save_ad) {
     curr_user = Meteor.users.find({_id:Meteor.user()._id}).fetch()[0];
