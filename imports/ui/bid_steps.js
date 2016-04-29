@@ -284,7 +284,7 @@ function hex2rgba(hex) {
     // });
 
     function resizeCanvases () {
-
+      //TODO make this not delete everything
       [].forEach.call(document.querySelectorAll('.rainbow-pixel-canvas'), function (canvas) {
         canvas.width = 32*pixelSize+1;
         canvas.height = 32*pixelSize+1;
