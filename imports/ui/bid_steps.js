@@ -138,15 +138,23 @@ Template.bid_steps.onRendered(function() {
       paletteColor = "#e03997";
     } else if ($(this).hasClass("brown")) {
       paletteColor = "#a5673f";
+    }
+      else if ($(this).hasClass("basic")) {
+      paletteColor = "#ffffff";
+  
+    
     } else if ($(this).hasClass("grey")) {
       paletteColor = "#767676";
     } else if ($(this).hasClass("black")) {
       paletteColor = "#000000";
-    } else if ($(this).hasClass("erase")) {
-      paletteColor = "#ffffff";
+    }else if ($(this).hasClass("erase")) {
+      paletteColor = "#000000";
     } else if ($(this).hasClass("trash")) {
      var context = $('.rainbow-pixel-canvas')[0].getContext('2d');
-      context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+      context.fillStyle = "#000000";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.fillStyle = paletteColor;
+      // context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     }
   });
 
@@ -297,13 +305,17 @@ function hex2rgba(hex) {
       [].forEach.call(document.querySelectorAll('.rainbow-pixel-canvas'), function (canvas) {
         canvas.width = 32*pixelSize+1;
         canvas.height = 32*pixelSize+1;
+        var context = canvas.getContext("2d");
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        // var rgba_color = hex2rgba("#000000");
+        // floodfill(0, 0, rgba_color, context);
       });
     }
     resizeCanvases();
 
     // interact.js can also add DOM event listeners
-    interact(document).on('DOMContentLoaded', resizeCanvases);
-    interact(window).on('resize', resizeCanvases);
+    // interact(document).on('DOMContentLoaded', resizeCanvases);
+    // interact(window).on('resize', resizeCanvases);
 
   interact.maxInteractions(Infinity); 
 

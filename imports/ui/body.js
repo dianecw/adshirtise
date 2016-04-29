@@ -192,7 +192,13 @@ Template.body.events({
     }
     if (save_ad) {
     curr_user = Meteor.users.find({_id:Meteor.user()._id}).fetch()[0];
-    curr_ads_count = curr_user.profile.ads_count
+    if (curr_user.profile === undefined) {
+      curr_ads_count = 0;
+    } else {
+      curr_ads_count = curr_user.profile.ads_count;
+    }
+    
+
     if (curr_ads_count==null) {
     Meteor.users.update({_id:Meteor.user()._id}, 
       { $set: {"profile.ads_count": 1 }})
