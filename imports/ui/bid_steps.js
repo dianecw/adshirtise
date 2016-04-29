@@ -28,12 +28,16 @@ var floodfill = (function() {
     var i = (x+y*width)*4;
     var e = i, w = i, me, mw, w2 = width*4;
     var targetcolor = [data[i],data[i+1],data[i+2],data[i+3]];
-
     if(!pixelCompare(i,targetcolor,fillcolor,data,length,tolerance)) { return false; }
+    console.log("i!", i);
     Q.push(i);
     while(Q.length) {
       i = Q.pop();
+
+      // console.log(i, Q.length);
+      
       if(pixelCompareAndSet(i,targetcolor,fillcolor,data,length,tolerance)) {
+        // console.log("in i ", i);
         e = i;
         w = i;
         mw = parseInt(i/w2)*w2; //left bound
@@ -51,29 +55,37 @@ var floodfill = (function() {
 
   function pixelCompare(i,targetcolor,fillcolor,data,length,tolerance) {
     if (i<0||i>=length) return false; //out of bounds
-    if (data[i+3]===0 && fillcolor.a>0) return true;  //surface is invisible and fill is visible
-
+    // if (data[i+3]===0 && fillcolor.a>0) {
+    // console.log("op1");
+    // return true;  //surface is invisible and fill is visible
+    // }
     if (
-      (targetcolor[3] === fillcolor.a) &&
       (targetcolor[0] === fillcolor.r) &&
       (targetcolor[1] === fillcolor.g) &&
       (targetcolor[2] === fillcolor.b)
-    ) return false; //target is same as fill
-
+    ) {
+    console.log("op2");
+    return false; //target is same as fill
+    }
     if (
-      (targetcolor[3] === data[i+3]) &&
       (targetcolor[0] === data[i]  ) &&
       (targetcolor[1] === data[i+1]) &&
       (targetcolor[2] === data[i+2])
-    ) return true; //target matches surface
-
+    ) {
+    console.log("op3");
+    console.log(targetcolor);
+    console.log(data);
+    return true; //target matches surface
+    }
     if (
-      Math.abs(targetcolor[3] - data[i+3])<=(255-tolerance) &&
       Math.abs(targetcolor[0] - data[i]  )<=tolerance &&
       Math.abs(targetcolor[1] - data[i+1])<=tolerance &&
       Math.abs(targetcolor[2] - data[i+2])<=tolerance
-    ) return true; //target to surface within tolerance
-
+    ) {
+      console.log("op4");      
+    return true; //target to surface within tolerance
+    }
+    console.log("none");
     return false; //no match
   }
 
@@ -165,25 +177,14 @@ Template.bid_steps.onRendered(function() {
   var pixelSize = 8;
 
   //getting canvas coords for clicks fml
-  function relMouseCoords(event){
-    var totalOffsetX = 0;
-    var totalOffsetY = 0;
-    var canvasX = 0;
-    var canvasY = 0;
-    var currentElement = this;
-
-    do{
-        totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
-        totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
-    }
-    while(currentElement = currentElement.offsetParent)
-
-    canvasX = event.pageX - totalOffsetX;
-    canvasY = event.pageY - totalOffsetY;
-
-    return {x:canvasX, y:canvasY}
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top
+    };
 }
-HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
+HTMLCanvasElement.prototype.getMousePos = getMousePos;
 
 /**
  * hex2rgb - function for converting hex colors to rgb(a)
@@ -240,15 +241,23 @@ function hex2rgba(hex) {
     console.log("filling....");
     //TODO: DEBUG coordinates. ugh. 
     var canvas = document.getElementById("canvas"); 
-    coords = canvas.relMouseCoords(event);
+    coords = canvas.getMousePos(canvas, event);
     var context = event.target.getContext('2d');
     var rgba_color = hex2rgba(paletteColor);
-    floodfill(coords.x - pixelSize / 2, coords.y - pixelSize / 2, rgba_color, context);
+
+    console.log("coords are  ", coords.x, coords.y);
+
+    floodfill(Math.round(coords.x) - pixelSize / 2, Math.round(coords.y) - pixelSize / 2, rgba_color, context);
+    console.log('done');
+    context.fillStyle = '#ff0069';
+    context.fillRect(coords.x - pixelSize / 2, coords.y - pixelSize / 2,
+                       pixelSize, pixelSize);
 
   }
 
 
   function draw_px(event) {
+    console.log("coords are ", event.pageX, event.pageY);
     var context = event.target.getContext('2d');
     context.fillStyle = paletteColor;
     context.fillRect(event.pageX - pixelSize / 2, event.pageY - pixelSize / 2,
