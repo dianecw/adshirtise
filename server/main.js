@@ -38,14 +38,15 @@ if (Meteor.isServer) {
           best_bid = (Bids.find({round: advertiser.round}, {limit:1, sort: {value: -1}})).fetch()[0];
           if (best_bid === undefined) {
             msg = "No current ad."
+            isText = true;
           } else {
             msg = best_bid.msg;
-
+            isText = best_bid.isText;
             // Take money away from winning bidder.
             user = (Meteor.users.find({'username': best_bid.username}).fetch())[0];
             Meteor.users.update(user._id, {$set: {money: user.money - best_bid.value}});
           }
-          Advertisers.update(advertiser._id, {$set: {curr_msg: msg, round: Number(advertiser.round) + 1}});
+          Advertisers.update(advertiser._id, {$set: {isText: isText, curr_msg: msg, round: Number(advertiser.round) + 1}});
 
           // Give random amount of money ($1-$500) to every user... Worried this could get really slow...
           var users_cursor = Meteor.users.find().forEach(function(obj){
