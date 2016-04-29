@@ -1,7 +1,7 @@
 import './bid_steps.html'
 
 Template.bid_steps.onRendered(function(){
-  var paletteColor = "#000000";
+  var paletteColor = "#db2828";
   $('.palette').click(function(event)
   {
     event.preventDefault();
