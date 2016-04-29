@@ -139,7 +139,10 @@ Template.bid_steps.onRendered(function() {
       paletteColor = "#000000";
     } else if ($(this).hasClass("trash")) {
      var context = $('.rainbow-pixel-canvas')[0].getContext('2d');
-      context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+      context.fillStyle = "#000000";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.fillStyle = paletteColor;
+      // context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     }
   });
 
