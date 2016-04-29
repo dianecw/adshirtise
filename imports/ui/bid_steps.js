@@ -293,8 +293,8 @@ function hex2rgba(hex) {
     resizeCanvases();
 
     // interact.js can also add DOM event listeners
-    interact(document).on('DOMContentLoaded', resizeCanvases);
-    interact(window).on('resize', resizeCanvases);
+    // interact(document).on('DOMContentLoaded', resizeCanvases);
+    // interact(window).on('resize', resizeCanvases);
 
   interact.maxInteractions(Infinity); 
 
