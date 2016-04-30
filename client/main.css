@@ -126,7 +126,8 @@
 }
 #user-message-header{
   margin-top: 0.2em;
-  margin-bottom:0.7em;
+  padding-bottom:0.7em;
+
 }
 
 #save_ad{

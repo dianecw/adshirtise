@@ -52,18 +52,83 @@ Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('advertisers');
 });
 
+
+function hex2rgb(hex) {
+  hex = (hex + '').trim();
+
+  var rgb = null
+    , match = hex.match(/^#?(([0-9a-zA-Z]{3}){1,3})$/);
+
+  if(!match) { return null; }
+  
+  rgb = {}
+
+  hex = match[1];
+  // check if 6 letters are provided
+  if (hex.length == 6) {
+    rgb.r = parseInt(hex.substring(0, 2), 16);
+    rgb.g = parseInt(hex.substring(2, 4), 16);
+    rgb.b = parseInt(hex.substring(4, 6), 16);
+  }
+  else if (hex.length == 3) {
+    rgb.r = parseInt(hex.substring(0, 1) + hex.substring(0, 1), 16);
+    rgb.g = parseInt(hex.substring(1, 2) + hex.substring(1, 2), 16);
+    rgb.b = parseInt(hex.substring(2, 3) + hex.substring(2, 3), 16);
+  }
+  return rgb;
+}
+
 calculate_min = function() {
+
   advertiser = (Advertisers.find({}, {limit: 1, sort: { value: -1 }}).fetch())[0];
   if (advertiser === undefined) {
     return 0;
   }
   else if (advertiser.population !== undefined) {
-    return advertiser.population; // some calculation should go here
-  } else {
+    if (advertiser.population < 100) return 0;
+    else if (advertiser.population >= 100 && advertiser.population < 1000) return 5;
+    else if (advertiser.population >= 1000 && advertiser.population < 5000) return 10;
+    else if (advertiser.population >= 5000) return 20;
+   } else {
     return 0;
   }
 };
 
+//default red
+var textColor = hex2rgb("#db2828");
+//for getting text ad color.
+$('.textad').click(function(event)
+  {
+    event.preventDefault();
+    if ($(this).hasClass("red")) {
+      textColor = hex2rgb("#db2828");
+    } else if ($(this).hasClass("orange")) {
+      textColor = hex2rgb("#f26202");
+    } else if ($(this).hasClass("yellow")) {
+      textColor = hex2rgb("#fbbd08");
+    } else if ($(this).hasClass("olive")) {
+      textColor = hex2rgb("#b5cc18");
+    } else if ($(this).hasClass("green")) {
+      textColor = hex2rgb("#21ba45");
+    } else if ($(this).hasClass("teal")) {
+      textColor = hex2rgb("#00b5ad");
+    } else if ($(this).hasClass("blue")) {
+      textColor = hex2rgb("#2185d0");
+    } else if ($(this).hasClass("violet")) {
+      textColor = hex2rgb("#6435c9");
+    } else if ($(this).hasClass("purple")) {
+      textColor = hex2rgb("#a333c8");
+    } else if ($(this).hasClass("pink")) {
+      textColor = hex2rgb("#e03997");
+    } else if ($(this).hasClass("brown")) {
+      textColor = hex2rgb("#a5673f");
+    }
+      else if ($(this).hasClass("basic")) {
+      textColor = hex2rgb("#ffffff");
+    } else if ($(this).hasClass("grey")) {
+      textColor = hex2rgb("#767676");
+    }
+  });
 
 
 $.validator.addMethod( 'enoughMoney', ( money ) => {
@@ -116,8 +181,15 @@ Template.bid_user.helpers({
   popularity() {
     advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
     if (advertiser.population !== undefined) {
-      return advertiser.population; // some calculation should go here
+      return Math.round(advertiser.population/1000 + (Math.random() * 100) + 1); // some calculation should go here
     } 
+    return 0;
+  },
+  image_feed() {
+    advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
+    if (advertiser.face_img !== undefined) {
+      return "data:image/jpeg;base64,".concat(advertiser.face_img);
+    }
     return 0;
   }
 });
@@ -183,6 +255,7 @@ Template.body.events({
       username: Meteor.user().username,
       msg: msg,
       isText: isText,
+      textColor: textColor,
       round: advertiser.round});
 
     if (isText) {
