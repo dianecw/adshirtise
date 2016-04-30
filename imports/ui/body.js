@@ -69,6 +69,43 @@ calculate_min = function() {
   }
 };
 
+//default red
+var textColor = "#db2828";
+//for getting text ad color.
+$('.textad').click(function(event)
+  {
+    event.preventDefault();
+    if ($(this).hasClass("red")) {
+      textColor = "#db2828";
+    } else if ($(this).hasClass("orange")) {
+      textColor = "#f26202";
+    } else if ($(this).hasClass("yellow")) {
+      textColor = "#fbbd08";
+    } else if ($(this).hasClass("olive")) {
+      textColor = "#b5cc18";
+    } else if ($(this).hasClass("green")) {
+      textColor = "#21ba45";
+    } else if ($(this).hasClass("teal")) {
+      textColor = "#00b5ad";
+    } else if ($(this).hasClass("blue")) {
+      textColor = "#2185d0";
+    } else if ($(this).hasClass("violet")) {
+      textColor = "#6435c9";
+    } else if ($(this).hasClass("purple")) {
+      textColor = "#a333c8";
+    } else if ($(this).hasClass("pink")) {
+      textColor = "#e03997";
+    } else if ($(this).hasClass("brown")) {
+      textColor = "#a5673f";
+    }
+      else if ($(this).hasClass("basic")) {
+      textColor = "#ffffff";
+    } else if ($(this).hasClass("grey")) {
+      textColor = "#767676";
+    } else if ($(this).hasClass("black")) {
+      textColor = "#000000";
+    }
+  });
 
 
 $.validator.addMethod( 'enoughMoney', ( money ) => {
@@ -195,6 +232,7 @@ Template.body.events({
       username: Meteor.user().username,
       msg: msg,
       isText: isText,
+      textColor: textColor,
       round: advertiser.round});
 
     if (isText) {
