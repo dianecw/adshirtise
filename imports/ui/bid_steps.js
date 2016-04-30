@@ -28,6 +28,8 @@ var floodfill = (function() {
     var i = (x+y*width)*4;
     var e = i, w = i, me, mw, w2 = width*4;
     var targetcolor = [data[i],data[i+1],data[i+2],data[i+3]];
+    console.log("target is ", targetcolor);
+
     if(!pixelCompare(i,targetcolor,fillcolor,data,length,tolerance)) { return false; }
     console.log("i!", i);
     Q.push(i);
@@ -116,7 +118,7 @@ var floodfill = (function() {
 
 Template.bid_steps.onRendered(function() { 
   var paletteColor = "#db2828";
-  $('.palette').click(function(event)
+  $('.tool').click(function(event)
   {
     event.preventDefault();
     if ($(this).hasClass("fill")) {
@@ -125,6 +127,11 @@ Template.bid_steps.onRendered(function() {
     else {
       fill_mode = false;
     }
+  });
+
+  $('.palette').click(function(event)
+  {
+    event.preventDefault();
     if ($(this).hasClass("red")) {
       paletteColor = "#db2828";
     } else if ($(this).hasClass("orange")) {
@@ -191,7 +198,7 @@ Template.bid_steps.onRendered(function() {
   });
    
   // For drawing image
-  var pixelSize = 10;
+  var pixelSize = 8;
 
   //getting canvas coords for clicks fml
 function getMousePos(canvas, evt) {
@@ -244,16 +251,6 @@ function hex2rgba(hex) {
   return rgb;
 }
 
-  function draw_px_click(event) {
-    console.log("clciksds");
-    var canvas = document.getElementById("canvas"); 
-    coords = canvas.relMouseCoords(event);
-    var context = event.target.getContext('2d');
-    context.fillStyle = paletteColor;
-    context.fillRect(coords.x - pixelSize / 2, coords.y - pixelSize / 2,
-                       pixelSize, pixelSize);
-  }
-
   function fill(event) {
     console.log("filling....");
     //TODO: DEBUG coordinates. ugh. 
@@ -273,7 +270,7 @@ function hex2rgba(hex) {
     var context = event.target.getContext('2d');
     context.fillStyle = paletteColor;
     context.fillRect(event.pageX - pixelSize / 2, event.pageY - pixelSize / 2,
-                       pixelSize, pixelSize);
+                       pixelSize*1.25, pixelSize*1.25);
   }
 
   interact('.rainbow-pixel-canvas')
