@@ -60,11 +60,10 @@ calculate_min = function() {
   }
   else if (advertiser.population !== undefined) {
     if (advertiser.population < 100) return 0;
-    else if (advertiser.population < 1000) return 5;
-    else if (advertiser.population < 5000) return 10;
-    else if (advertiser.population < 10000) return 20;
-
-  } else {
+    else if (advertiser.population >= 100 && advertiser.population < 1000) return 5;
+    else if (advertiser.population >= 1000 && advertiser.population < 5000) return 10;
+    else if (advertiser.population >= 5000) return 20;
+   } else {
     return 0;
   }
 };
