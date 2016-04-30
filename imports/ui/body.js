@@ -53,12 +53,17 @@ Template.body.onCreated(function bodyOnCreated() {
 });
 
 calculate_min = function() {
+
   advertiser = (Advertisers.find({}, {limit: 1, sort: { value: -1 }}).fetch())[0];
   if (advertiser === undefined) {
     return 0;
   }
   else if (advertiser.population !== undefined) {
-    return advertiser.population; // some calculation should go here
+    if (advertiser.population < 100) return 0;
+    else if (advertiser.population < 1000) return 5;
+    else if (advertiser.population < 5000) return 10;
+    else if (advertiser.population < 10000) return 20;
+
   } else {
     return 0;
   }
@@ -116,7 +121,7 @@ Template.bid_user.helpers({
   popularity() {
     advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
     if (advertiser.population !== undefined) {
-      return advertiser.population; // some calculation should go here
+      return Math.round(advertiser.population/1000 + (Math.random() * 100) + 1); // some calculation should go here
     } 
     return 0;
   },
