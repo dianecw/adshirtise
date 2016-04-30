@@ -71,6 +71,7 @@ if (Meteor.isServer) {
           if (best_bid === undefined) {
             msg = "No current ad."
             isText = true;
+            textColor = "#db2828";
           } else {
             msg = best_bid.msg;
             isText = best_bid.isText;
