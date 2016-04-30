@@ -58,6 +58,31 @@ if (Meteor.isServer) {
     }
   }).run();
 
+function hex2rgb(hex) {
+  hex = (hex + '').trim();
+
+  var rgb = null
+    , match = hex.match(/^#?(([0-9a-zA-Z]{3}){1,3})$/);
+
+  if(!match) { return null; }
+  
+  rgb = {}
+
+  hex = match[1];
+  // check if 6 letters are provided
+  if (hex.length == 6) {
+    rgb.r = parseInt(hex.substring(0, 2), 16);
+    rgb.g = parseInt(hex.substring(2, 4), 16);
+    rgb.b = parseInt(hex.substring(4, 6), 16);
+  }
+  else if (hex.length == 3) {
+    rgb.r = parseInt(hex.substring(0, 1) + hex.substring(0, 1), 16);
+    rgb.g = parseInt(hex.substring(1, 2) + hex.substring(1, 2), 16);
+    rgb.b = parseInt(hex.substring(2, 3) + hex.substring(2, 3), 16);
+  }
+  return rgb;
+}
+
   setInterval(function() 
     {
       seconds = new Date().getSeconds()
@@ -71,7 +96,7 @@ if (Meteor.isServer) {
           if (best_bid === undefined) {
             msg = "No current ad."
             isText = true;
-            textColor = "#db2828";
+            textColor = hex2rgb("#db2828");
           } else {
             msg = best_bid.msg;
             isText = best_bid.isText;

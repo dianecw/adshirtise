@@ -52,6 +52,32 @@ Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('advertisers');
 });
 
+
+function hex2rgb(hex) {
+  hex = (hex + '').trim();
+
+  var rgb = null
+    , match = hex.match(/^#?(([0-9a-zA-Z]{3}){1,3})$/);
+
+  if(!match) { return null; }
+  
+  rgb = {}
+
+  hex = match[1];
+  // check if 6 letters are provided
+  if (hex.length == 6) {
+    rgb.r = parseInt(hex.substring(0, 2), 16);
+    rgb.g = parseInt(hex.substring(2, 4), 16);
+    rgb.b = parseInt(hex.substring(4, 6), 16);
+  }
+  else if (hex.length == 3) {
+    rgb.r = parseInt(hex.substring(0, 1) + hex.substring(0, 1), 16);
+    rgb.g = parseInt(hex.substring(1, 2) + hex.substring(1, 2), 16);
+    rgb.b = parseInt(hex.substring(2, 3) + hex.substring(2, 3), 16);
+  }
+  return rgb;
+}
+
 calculate_min = function() {
 
   advertiser = (Advertisers.find({}, {limit: 1, sort: { value: -1 }}).fetch())[0];
@@ -69,40 +95,38 @@ calculate_min = function() {
 };
 
 //default red
-var textColor = "#db2828";
+var textColor = hex2rgb("#db2828");
 //for getting text ad color.
 $('.textad').click(function(event)
   {
     event.preventDefault();
     if ($(this).hasClass("red")) {
-      textColor = "#db2828";
+      textColor = hex2rgb("#db2828");
     } else if ($(this).hasClass("orange")) {
-      textColor = "#f26202";
+      textColor = hex2rgb("#f26202");
     } else if ($(this).hasClass("yellow")) {
-      textColor = "#fbbd08";
+      textColor = hex2rgb("#fbbd08");
     } else if ($(this).hasClass("olive")) {
-      textColor = "#b5cc18";
+      textColor = hex2rgb("#b5cc18");
     } else if ($(this).hasClass("green")) {
-      textColor = "#21ba45";
+      textColor = hex2rgb("#21ba45");
     } else if ($(this).hasClass("teal")) {
-      textColor = "#00b5ad";
+      textColor = hex2rgb("#00b5ad");
     } else if ($(this).hasClass("blue")) {
-      textColor = "#2185d0";
+      textColor = hex2rgb("#2185d0");
     } else if ($(this).hasClass("violet")) {
-      textColor = "#6435c9";
+      textColor = hex2rgb("#6435c9");
     } else if ($(this).hasClass("purple")) {
-      textColor = "#a333c8";
+      textColor = hex2rgb("#a333c8");
     } else if ($(this).hasClass("pink")) {
-      textColor = "#e03997";
+      textColor = hex2rgb("#e03997");
     } else if ($(this).hasClass("brown")) {
-      textColor = "#a5673f";
+      textColor = hex2rgb("#a5673f");
     }
       else if ($(this).hasClass("basic")) {
-      textColor = "#ffffff";
+      textColor = hex2rgb("#ffffff");
     } else if ($(this).hasClass("grey")) {
-      textColor = "#767676";
-    } else if ($(this).hasClass("black")) {
-      textColor = "#000000";
+      textColor = hex2rgb("#767676");
     }
   });
 
