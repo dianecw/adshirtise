@@ -119,6 +119,13 @@ Template.bid_user.helpers({
       return advertiser.population; // some calculation should go here
     } 
     return 0;
+  },
+  image_feed() {
+    advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
+    if (advertiser.face_img !== undefined) {
+      return "data:image/jpeg;base64,".concat(advertiser.face_img);
+    }
+    return 0;
   }
 });
 

@@ -304,8 +304,8 @@ function hex2rgba(hex) {
     function resizeCanvases () {
 
       [].forEach.call(document.querySelectorAll('.rainbow-pixel-canvas'), function (canvas) {
-        canvas.width = 32*pixelSize+1;
-        canvas.height = 32*pixelSize+1;
+        canvas.width = 32*pixelSize+pixelSize;
+        canvas.height = 32*pixelSize+pixelSize;
         var context = canvas.getContext("2d");
         context.fillRect(0, 0, canvas.width, canvas.height);
         // var rgba_color = hex2rgba("#000000");
