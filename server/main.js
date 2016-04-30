@@ -1,6 +1,37 @@
 import { Meteor } from 'meteor/meteor';
 Fiber = Npm.require('fibers');
 
+var cash_to_text = 0;
+var exec = Npm.require('child_process').exec;
+var Future = Npm.require('fibers/future');
+
+var ENABLE_TEXTS = false; //turn me on to send texts
+
+function send_text(money) {
+  if (ENABLE_TEXTS) {
+    console.log("sending...");
+    const ACCOUNT_SID = 'AC5cf52e2ba03948f3ddb0d15efc732794';
+    const AUTH_TOKEN = '845aeb7e0d858fbfe3ce19f2b11738e3';
+    //TODO DELETE AFTER PUSHING!
+    twilio = Twilio(ACCOUNT_SID, AUTH_TOKEN);
+    twilio.sendSms({
+      to:'+18053045062', // Any number Twilio can deliver to
+      from: '+15103610038', // A number you bought from Twilio and can use for outbound communication
+      body: "You've made $" + money + " so far!" // body of the SMS message
+    }, function(err, responseData) { //this function is executed when a response is received from Twilio
+      if (!err) { // "err" is an error received during the request, if any
+        // "responseData" is a JavaScript object containing data received from Twilio.
+        // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
+        // http://www.twilio.com/docs/api/rest/sending-sms#example-1
+        console.log("SUCCESS");
+        console.log(responseData.from); // outputs "+14506667788"
+        console.log(responseData.body); // outputs "word to your mother."
+      }
+  });
+  }
+}
+
+
 Meteor.startup(() => {
   // code to run on server at startup
 Bids = new Mongo.Collection('bids');
@@ -31,6 +62,7 @@ if (Meteor.isServer) {
     {
       seconds = new Date().getSeconds()
       percentage = (60 - ( seconds % 60))*(100/60);
+
       if (percentage == 100) {
         Fiber(function() {
           advertiser = (Advertisers.find({}, {limit: 1}).fetch())[0];
@@ -42,11 +74,20 @@ if (Meteor.isServer) {
           } else {
             msg = best_bid.msg;
             isText = best_bid.isText;
+            textColor = best_bid.textColor;
             // Take money away from winning bidder.
             user = (Meteor.users.find({'username': best_bid.username}).fetch())[0];
             Meteor.users.update(user._id, {$set: {money: user.money - best_bid.value}});
+            cash_to_text = cash_to_text + best_bid.value;
+          
+            if (best_bid.round % 1 == 0) { //sending a text every 5 rounds
+              send_text(cash_to_text);
+              console.log("POSTED WITH ", cash_to_text);
+
+              cash_to_text = 0; //reset
+            }
           }
-          Advertisers.update(advertiser._id, {$set: {isText: isText, curr_msg: msg, round: Number(advertiser.round) + 1}});
+          Advertisers.update(advertiser._id, {$set: {isText: isText, text_color: textColor, curr_msg: msg, round: Number(advertiser.round) + 1}});
 
           // Give random amount of money ($1-$500) to every user... Worried this could get really slow...
           var users_cursor = Meteor.users.find().forEach(function(obj){
