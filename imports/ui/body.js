@@ -252,7 +252,7 @@ Template.body.events({
       var jpegUrl = canvas.toDataURL("image/jpeg");
       var msg = jpegUrl.substring(23, jpegUrl.length);
     } else if (currentTab = 'explore') {
-      isText = false;
+      isText = $('.explore-active').find('.is-text').text().trim() == "Text";
       var msg= $('.explore-active').find('.real-msg').text().trim();
 
     }
