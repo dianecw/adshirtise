@@ -1,0 +1,1 @@
+sudo ./led-image-viewer test2.jpg
