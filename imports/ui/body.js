@@ -50,6 +50,16 @@ Template.user_menu.onRendered(function () {
 
 });
 
+Template.bid_steps.events({
+  'click .explore.input': function(e){
+    //console.log($(e.target).parent());
+    $(".explore.input").removeClass("explore-active");
+    $(e.target).parent().addClass("explore-active");
+    $(".explore.input").removeClass("active");
+    $(e.target).parent().addClass("active");
+  },
+  });
+
 Template.user_ads.events({
   'click .saved.input': function(e){
     //console.log($(e.target).parent());
@@ -271,8 +281,11 @@ Template.body.events({
       isText = false;
       canvas = $('.rainbow-pixel-canvas')[0]
       var jpegUrl = canvas.toDataURL("image/jpeg");
-      console.log(jpegUrl);
       var msg = jpegUrl.substring(23, jpegUrl.length);
+    } else if (currentTab = 'explore') {
+      isText = false;
+      var msg= $('.explore-active').find('.real-msg').text().trim();
+
     }
    
     // Insert a task into the collection
