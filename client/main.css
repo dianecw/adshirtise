@@ -200,3 +200,9 @@ float:right;
 .is-text{
   margin-top:0 !important;
 }
+
+.image.no-money{
+  height:7em;
+  margin:auto;
+  margin-bottom:1em;
+}
