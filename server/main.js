@@ -112,12 +112,12 @@ function hex2rgb(hex) {
             Meteor.users.update(user._id, {$set: {money: user.money - best_bid.value}});
             cash_to_text = cash_to_text + best_bid.value;
           
-            if (best_bid.round % 5 == 0) { //sending a text every 5 rounds
+            //if (best_bid.round % 5 == 0) { //sending a text every 5 rounds
               send_text(cash_to_text);
               console.log("POSTED WITH ", cash_to_text);
 
               cash_to_text = 0; //reset
-            }
+            //}
           }
           Advertisers.update(advertiser._id, {$set: {isText: isText, text_color: textColor, curr_msg: msg, round: Number(advertiser.round) + 1}});
 
