@@ -36,6 +36,29 @@ Template.user_menu.events({
 
 });
 
+
+Template.user_menu.onRendered(function () {
+   $('.send-texts').checkbox({
+    onChecked: function() {
+      console.log("toggled!")
+    },
+    onUnchecked: function() {
+      console.log("untoggled!")
+    }
+  });
+
+});
+
+Template.bid_steps.events({
+  'click .explore.input': function(e){
+    //console.log($(e.target).parent());
+    $(".explore.input").removeClass("explore-active");
+    $(e.target).parent().addClass("explore-active");
+    $(".explore.input").removeClass("active");
+    $(e.target).parent().addClass("active");
+  },
+  });
+
 Template.user_ads.events({
   'click .saved.input': function(e){
     //console.log($(e.target).parent());
@@ -104,39 +127,8 @@ calculate_min = function() {
 
 //default red
 var textColor = hex2rgb("#db2828");
-//for getting text ad color.
-$('.textad').click(function(event)
-  {
-    event.preventDefault();
-    if ($(this).hasClass("red")) {
-      textColor = hex2rgb("#db2828");
-    } else if ($(this).hasClass("orange")) {
-      textColor = hex2rgb("#f26202");
-    } else if ($(this).hasClass("yellow")) {
-      textColor = hex2rgb("#fbbd08");
-    } else if ($(this).hasClass("olive")) {
-      textColor = hex2rgb("#b5cc18");
-    } else if ($(this).hasClass("green")) {
-      textColor = hex2rgb("#21ba45");
-    } else if ($(this).hasClass("teal")) {
-      textColor = hex2rgb("#00b5ad");
-    } else if ($(this).hasClass("blue")) {
-      textColor = hex2rgb("#2185d0");
-    } else if ($(this).hasClass("violet")) {
-      textColor = hex2rgb("#6435c9");
-    } else if ($(this).hasClass("purple")) {
-      textColor = hex2rgb("#a333c8");
-    } else if ($(this).hasClass("pink")) {
-      textColor = hex2rgb("#e03997");
-    } else if ($(this).hasClass("brown")) {
-      textColor = hex2rgb("#a5673f");
-    }
-      else if ($(this).hasClass("basic")) {
-      textColor = hex2rgb("#ffffff");
-    } else if ($(this).hasClass("grey")) {
-      textColor = hex2rgb("#767676");
-    }
-  });
+
+
 
 
 
@@ -242,7 +234,7 @@ Template.body.events({
     event.preventDefault();
 
     var currentTab = $('.active.ad-menu').attr('data-tab')
- 
+    console.log("TEXT COLOR IS ", textColor);
     
     // Get value from form element
     const target = event.target;
@@ -257,8 +249,11 @@ Template.body.events({
       isText = false;
       canvas = $('.rainbow-pixel-canvas')[0]
       var jpegUrl = canvas.toDataURL("image/jpeg");
-      console.log(jpegUrl);
       var msg = jpegUrl.substring(23, jpegUrl.length);
+    } else if (currentTab = 'explore') {
+      isText = $('.explore-active').find('.is-text').text().trim() == "Text";
+      var msg= $('.explore-active').find('.real-msg').text().trim();
+
     }
    
     // Insert a task into the collection
