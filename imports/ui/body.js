@@ -118,39 +118,8 @@ calculate_min = function() {
 
 //default red
 var textColor = hex2rgb("#db2828");
-//for getting text ad color.
-$('.textad').click(function(event)
-  {
-    event.preventDefault();
-    if ($(this).hasClass("red")) {
-      textColor = hex2rgb("#db2828");
-    } else if ($(this).hasClass("orange")) {
-      textColor = hex2rgb("#f26202");
-    } else if ($(this).hasClass("yellow")) {
-      textColor = hex2rgb("#fbbd08");
-    } else if ($(this).hasClass("olive")) {
-      textColor = hex2rgb("#b5cc18");
-    } else if ($(this).hasClass("green")) {
-      textColor = hex2rgb("#21ba45");
-    } else if ($(this).hasClass("teal")) {
-      textColor = hex2rgb("#00b5ad");
-    } else if ($(this).hasClass("blue")) {
-      textColor = hex2rgb("#2185d0");
-    } else if ($(this).hasClass("violet")) {
-      textColor = hex2rgb("#6435c9");
-    } else if ($(this).hasClass("purple")) {
-      textColor = hex2rgb("#a333c8");
-    } else if ($(this).hasClass("pink")) {
-      textColor = hex2rgb("#e03997");
-    } else if ($(this).hasClass("brown")) {
-      textColor = hex2rgb("#a5673f");
-    }
-      else if ($(this).hasClass("basic")) {
-      textColor = hex2rgb("#ffffff");
-    } else if ($(this).hasClass("grey")) {
-      textColor = hex2rgb("#767676");
-    }
-  });
+
+
 
 
 
@@ -256,7 +225,7 @@ Template.body.events({
     event.preventDefault();
 
     var currentTab = $('.active.ad-menu').attr('data-tab')
- 
+    console.log("TEXT COLOR IS ", textColor);
     
     // Get value from form element
     const target = event.target;
