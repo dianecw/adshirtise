@@ -288,10 +288,12 @@ Template.body.events({
       textColor: textColor,
       round: advertiser.round});
 
-    if (isText) {
+    if (isText && currentTab == 'new-text') {
       var save_ad = document.getElementById('save_ad_checkbox').checked;
-    } else {
+    } else if (currentTab == 'new-image'){
       var save_ad = document.getElementById('save_ad_img_checkbox').checked;
+    } else{
+      var save_ad = false;
     }
     if (save_ad) {
     curr_user = Meteor.users.find({_id:Meteor.user()._id}).fetch()[0];
