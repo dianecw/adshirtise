@@ -44,7 +44,15 @@
       {{> loginButtons}}
       {{#if currentUser}}
       . You have <b>${{money(currentUser.username)}}</b>.
+      {{/if}} 
+      {{#if is_admin}}
+      <div class="ui small toggle checkbox send-texts" style="margin-left:1em;">
+        <input type="checkbox" name="send-texts">
+        <label>Send Texts</label>
+      </div>
       {{/if}}
+
+
     </div>
 </div>
   </div>

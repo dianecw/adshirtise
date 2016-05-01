@@ -25,17 +25,32 @@ Template.user_menu.events({
       //console.log(avatar_img);
       //console.log(Meteor.user().profile.avatar);
     });
-  }
+  },
+  'click .send-texts': function(e) {
+    if ($('.send-texts').find('input').prop('checked')){
+      console.log('toggled!');
+    } else {
+      console.log('untoggled!');
+
+    }
+  },
+
 });
-Template.user_ads.events({
 
 
-/**
-  $(".saved.input").click(function(e){
-    
+Template.user_menu.onRendered(function () {
+   $('.send-texts').checkbox({
+    onChecked: function() {
+      console.log("toggled!")
+    },
+    onUnchecked: function() {
+      console.log("untoggled!")
+    }
   });
 
-  },  **/
+});
+
+Template.user_ads.events({
   'click .saved.input': function(e){
     //console.log($(e.target).parent());
     $(".saved.input").removeClass("saved-active");
@@ -186,6 +201,10 @@ Template.user_menu.helpers({
     curr_user = curr_user.fetch()[0]
     return curr_user.money;
   },
+
+  is_admin(){
+    return Meteor.user().username == "admin"
+  }
 });
 
 Template.bid_user.helpers({

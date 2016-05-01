@@ -10,9 +10,7 @@ $( document ).ready(function() {
 
     //pop up for user profiles
 
-    $('.profile-tabs .item').tab()
-;
-
+    $('.profile-tabs .item').tab();
 
     function endBlackout(){
       $(".blackout").css("opacity", "0");
@@ -40,7 +38,7 @@ $( document ).ready(function() {
       .popup()
     ;
     $('.ui.checkbox').checkbox();
-    
+
 
     var progression = 0,
     progress = setInterval(function() 
