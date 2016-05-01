@@ -28,21 +28,28 @@ Template.user_menu.events({
   }
 });
 Template.user_ads.events({
-'click': function(e){
+
+
+/**
+  $(".saved.input").click(function(e){
+    
+  });
+
+  },  **/
+  'click .saved.input': function(e){
+    //console.log($(e.target).parent());
+    $(".saved.input").removeClass("saved-active");
+    $(e.target).parent().addClass("saved-active");
+    $(".saved.input").removeClass("active");
+    $(e.target).parent().addClass("active");
+  },
+
+  'click': function(e){
 
   $(".delete-saved").click(function(e){
     Meteor.users.update({_id:Meteor.user()._id}, 
         { $pull: {"profile.ads": { _id: parseInt(this.id)}} });
-  });
-
-  $(".saved.item").click(function(e){
-    $(".saved.item").removeClass("saved-active");
-    $(this).addClass("saved-active");
-    $(".saved.item").removeClass("active");
-    $(this).addClass("active");
-  });
-
-  }
+  });},
   });
  
 Template.body.onCreated(function bodyOnCreated() {
@@ -50,8 +57,8 @@ Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('bids');
   Meteor.subscribe('userData');
   Meteor.subscribe('advertisers');
-});
 
+});
 
 function hex2rgb(hex) {
   hex = (hex + '').trim();
@@ -131,6 +138,7 @@ $('.textad').click(function(event)
   });
 
 
+
 $.validator.addMethod( 'enoughMoney', ( money ) => {
   user = (Meteor.users.find({'username': Meteor.user().username}).fetch())[0];
   return user.money >= money ? true : false;
@@ -143,6 +151,9 @@ $.validator.addMethod( 'minMoney', ( money ) => {
 
 
 Template.user_ads.helpers({
+  activateRadioBtns() {
+    $('.ui.radio.checkbox').checkbox();
+  },
   user_ads() {
     curr_user = Meteor.users.find({"username": Meteor.user().username});
     curr_user = curr_user.fetch()[0]
@@ -236,7 +247,7 @@ Template.body.events({
       var msg = document.getElementById('msg').value;
     } else if (currentTab == 'saved'){
       var msg = $('.saved-active').find('.real-msg').text().trim()
-      isText = $('.saved-active').find('.label').text().trim() == "Text";
+      isText = $('.saved-active').find('.is-text').text().trim() == "Text";
     } else if (currentTab == 'new-image') {
       isText = false;
       canvas = $('.rainbow-pixel-canvas')[0]

@@ -1,25 +1,77 @@
 <template name="user_ads">
-  <div class="ui divided selection list">
+
+  <div class="ui form">
+  <div class="grouped fields">
+  <div class="ui items">
     {{#each user_ads}}
       {{> ad}}
+      <div class="ui divider" style="margin:0.3em"></div>
     {{else}}
         <p>No saved ads yet.</p>
     {{/each}}
   </div>
+</div>
+</div>
+
 </template>
   
-<template name="ad">
 
-  <a class="saved item">
-    <div class="ui horizontal label">
-      
-      {{#if is_image msg}}
+
+
+
+
+<template name="ad">
+    <div class="field">
+    <div class="ui radio checkbox saved input">
+        <input type="radio" name="ad" style="vertical-align: center;">
+        <label> 
+        <span class="real-msg" style="display:none">
+          {{msg}}
+        </span>
+        <div class="item">
+          <div class="middle aligned content">
+            <div class="ui right floated basic icon button" style="box-shadow:none; padding-top:0.6em">
+                <i class="remove icon delete-saved" id={{_id}}></i>
+            </div>
+
+            <div class="header">
+               
+                {{#if is_image msg}}
+                <div class="ui basic label is-text" style="vertical-align: top;">
+                Image
+                </div>
+              {{else}}
+              <div class="ui basic label is-text" style="vertical-align: center;">
+                Text </div>
+              {{/if}}
+              
+              {{#if is_image msg}}
+                &nbsp; &nbsp;<img src={{msg_to_im msg}} width="64px" height="64px">
+              {{else}}
+                &nbsp; &nbsp; {{msg}}
+              {{/if}}
+
+            </div>
+
+          </div>
+        </div> <!--
+        
+        
+        <h2 class="is-text ui sub header">    
+        {{#if is_image msg}}
         Image
       {{else}}
         Text
-      {{/if}}
+      {{/if}}</h2></div>
+      <div class="ui right floated icon button">
+        <i class="remove icon delete-saved" id={{_id}}></i>
+      </div> -->
+      </label>
+      </div>
+
     </div>
     <!--{{_id}}: -->
+    <!--
     <span class="real-msg" style="display:none">
       {{msg}}
     </span>
@@ -32,9 +84,6 @@
     </span>
     <div class="right floated content">
         <i class="remove icon delete-saved" id={{_id}}></i>
-        </div>
-
-  </a>
-      
+        </div> -->
       <!--<div class="header">{{username}}</div>-->
 </template>

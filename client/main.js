@@ -13,6 +13,7 @@ $( document ).ready(function() {
     $('.profile-tabs .item').tab()
 ;
 
+
     function endBlackout(){
       $(".blackout").css("opacity", "0");
       $(".blackout").css("display", "none");
@@ -38,6 +39,8 @@ $( document ).ready(function() {
     $('.flame-icon')
       .popup()
     ;
+    $('.ui.checkbox').checkbox();
+
 
     var progression = 0,
     progress = setInterval(function() 
