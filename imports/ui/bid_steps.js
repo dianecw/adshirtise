@@ -225,6 +225,7 @@ $('.ctextad').click(function(event)
         rules: {
             msgtext: {
               minlength: 1,
+              maxlength: 40,
               required: true
             },
             text: {
