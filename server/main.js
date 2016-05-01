@@ -5,7 +5,8 @@ var cash_to_text = 0;
 var exec = Npm.require('child_process').exec;
 var Future = Npm.require('fibers/future');
 
-var ENABLE_TEXTS = false; //turn me on to send texts
+
+ ENABLE_TEXTS = false; //turn me on to send texts
 
 function send_text(money) {
   if (ENABLE_TEXTS) {
@@ -30,6 +31,11 @@ function send_text(money) {
   });
   }
 }
+
+Meteor.methods({
+    enableTexts: function(enable_texts) { 
+      ENABLE_TEXTS = enable_texts;}
+});
 
 
 Meteor.startup(() => {

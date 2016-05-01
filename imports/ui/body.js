@@ -28,25 +28,11 @@ Template.user_menu.events({
   },
   'click .send-texts': function(e) {
     if ($('.send-texts').find('input').prop('checked')){
-      console.log('toggled!');
+      Meteor.call('enableTexts', true);
     } else {
-      console.log('untoggled!');
-
+      Meteor.call('enableTexts', false);
     }
   },
-
-});
-
-
-Template.user_menu.onRendered(function () {
-   $('.send-texts').checkbox({
-    onChecked: function() {
-      console.log("toggled!")
-    },
-    onUnchecked: function() {
-      console.log("untoggled!")
-    }
-  });
 
 });
 
