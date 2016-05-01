@@ -36,11 +36,11 @@ $( document ).ready(function() {
       ;
 
     //popups
-    $('.flame-icon')
+    $('.popularity-ribbon')
       .popup()
     ;
     $('.ui.checkbox').checkbox();
-
+    
 
     var progression = 0,
     progress = setInterval(function() 
