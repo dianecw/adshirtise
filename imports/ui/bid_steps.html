@@ -1,6 +1,5 @@
 <template name="bid_steps">
 <h4 class="">1. Choose an ad</h4>
-  <form class="new-bid">
   <div class="ui pointing secondary tabular ad-menu menu">
     <a class="ad-menu active item" data-tab="new-text">New Text Ad</a>
     <a class="ad-menu item" data-tab="new-image">New Image Ad</a>
@@ -9,7 +8,7 @@
   </div>
   <div class="ui active basic tab segment" data-tab="new-text">
         <div class="ui input">
-          <input type="text" class="msgtext" id="msg" name="msgtext" placeholder="Your custom message"/>
+          <input type="text" class="msgtext"  maxlength="40" style="color:#db2828;" id="msg" name="msgtext" placeholder="Your custom message"/>
         </div>
 	<br/>
 	<div class="ui toggle icon buttons" style="float:bottom">
@@ -186,6 +185,7 @@
 
 
 
+  <form class="new-bid">
 
   <h4 class="">2. Enter your best bid (Min: {{min_bid}})</h4>
   <div class="ui labeled input">

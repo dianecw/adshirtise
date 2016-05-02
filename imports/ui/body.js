@@ -13,7 +13,7 @@ import './user_profile.html'
 import './user_ads.html'
 
 //import './loginButtons.html'
-
+textColor = hex2rgb("#db2828");
 Template.user_menu.events({
     'click .dropdown.user .item': function(e) {
     $('.dropdown.user .item').click(function(){ 
@@ -125,13 +125,6 @@ calculate_min = function() {
   }
 };
 
-//default red
-textColor = hex2rgb("#db2828");
-$('.msgtext').css("color", "#db2828");
-
-
-
-
 
 $.validator.addMethod( 'enoughMoney', ( money ) => {
   user = (Meteor.users.find({'username': Meteor.user().username}).fetch())[0];
@@ -231,6 +224,7 @@ Template.bid.helpers({
 
 Template.body.events({
   'submit .new-bid'(event) {
+
     // Prevent default browser form submit
     event.preventDefault();
 

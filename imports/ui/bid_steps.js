@@ -134,6 +134,7 @@ $('.ctextad').click(function(event)
   {
     event.preventDefault();
     var hex;
+    console.log("FUCK!!!!");
     if ($(this).hasClass("red")) {
       hex = "#db2828"
     } else if ($(this).hasClass("orange")) {
