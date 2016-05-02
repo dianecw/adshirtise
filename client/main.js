@@ -7,6 +7,8 @@ import { Bids } from '../imports/api/bids.js';
 
 //import 'main.css';
 $( document ).ready(function() {
+    document.title = "Adshirt: Sell Yourself! Final Provocation for UC Berkeley's SP16 Critical Making class";
+
 
     //pop up for user profiles
 
