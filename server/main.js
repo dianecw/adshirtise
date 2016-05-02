@@ -5,7 +5,8 @@ var cash_to_text = 0;
 var exec = Npm.require('child_process').exec;
 var Future = Npm.require('fibers/future');
 
-var ENABLE_TEXTS = false; //turn me on to send texts
+
+ ENABLE_TEXTS = false; //turn me on to send texts
 
 function send_text(money) {
   if (ENABLE_TEXTS) {
@@ -30,6 +31,11 @@ function send_text(money) {
   });
   }
 }
+
+Meteor.methods({
+    enableTexts: function(enable_texts) { 
+      ENABLE_TEXTS = enable_texts;}
+});
 
 
 Meteor.startup(() => {
@@ -106,12 +112,12 @@ function hex2rgb(hex) {
             Meteor.users.update(user._id, {$set: {money: user.money - best_bid.value}});
             cash_to_text = cash_to_text + best_bid.value;
           
-            if (best_bid.round % 5 == 0) { //sending a text every 5 rounds
+            //if (best_bid.round % 5 == 0) { //sending a text every 5 rounds
               send_text(cash_to_text);
               console.log("POSTED WITH ", cash_to_text);
 
               cash_to_text = 0; //reset
-            }
+            //}
           }
           Advertisers.update(advertiser._id, {$set: {isText: isText, text_color: textColor, curr_msg: msg, round: Number(advertiser.round) + 1}});
 
