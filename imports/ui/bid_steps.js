@@ -162,10 +162,11 @@ $('.ctextad').click(function(event)
     } else if ($(this).hasClass("grey")) {
      hex = "#767676";
     }
-    textColor = hex2rgb(hex);
+
 
     $('.msgtext').css("color", hex);
-
+    textColor = hex2rgb(hex);
+    console.log('textColor ', textColor);
   });
 
 

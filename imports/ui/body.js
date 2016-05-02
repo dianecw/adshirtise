@@ -126,7 +126,8 @@ calculate_min = function() {
 };
 
 //default red
-var textColor = hex2rgb("#db2828");
+textColor = hex2rgb("#db2828");
+$('.msgtext').css("color", "#db2828");
 
 
 
