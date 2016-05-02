@@ -133,37 +133,38 @@ Template.bid_steps.onRendered(function() {
 $('.ctextad').click(function(event)
   {
     event.preventDefault();
-    console.log("hI");
+    var hex;
     if ($(this).hasClass("red")) {
-      textColor = hex2rgb("#db2828");
+      hex = "#db2828"
     } else if ($(this).hasClass("orange")) {
-      textColor = hex2rgb("#f26202");
+      hex = "#f26202"
     } else if ($(this).hasClass("yellow")) {
-      textColor = hex2rgb("#fbbd08");
+      hex = "#fbbd08";
     } else if ($(this).hasClass("olive")) {
-      textColor = hex2rgb("#b5cc18");
+      hex = "#b5cc18";
     } else if ($(this).hasClass("green")) {
-      textColor = hex2rgb("#21ba45");
+      hex = "#21ba45";
     } else if ($(this).hasClass("teal")) {
-      textColor = hex2rgb("#00b5ad");
+      hex = "#00b5ad";
     } else if ($(this).hasClass("blue")) {
-      textColor = hex2rgb("#2185d0");
+     hex = "#2185d0";
     } else if ($(this).hasClass("violet")) {
-      textColor = hex2rgb("#6435c9");
+     hex = "#6435c9";
     } else if ($(this).hasClass("purple")) {
-      textColor = hex2rgb("#a333c8");
+     hex = "#a333c8";
     } else if ($(this).hasClass("pink")) {
-      textColor = hex2rgb("#e03997");
+     hex = "#e03997";
     } else if ($(this).hasClass("brown")) {
-      textColor = hex2rgb("#a5673f");
+     hex = "#a5673f";
     }
       else if ($(this).hasClass("basic")) {
-      textColor = hex2rgb("#ffffff");
+     hex = "#ffffff";
     } else if ($(this).hasClass("grey")) {
-      textColor = hex2rgb("#767676");
+     hex = "#767676";
     }
-  
-    $('.msgtext').css("color", textColor);
+    textColor = hex2rgb(hex);
+
+    $('.msgtext').css("color", hex);
 
   });
 
